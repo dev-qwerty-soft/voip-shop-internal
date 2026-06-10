@@ -236,13 +236,16 @@ jQuery(document).ready(function ($) {
   }
 
   function showLoading() {
-    $('#loadingSpinner').addClass('show');
-    $('#productsGrid').addClass('loading');
+    $('#productsGrid').fadeOut(150, function() {
+      $('#skeletonGrid').addClass('show').hide().fadeIn(200);
+    });
   }
 
   function hideLoading() {
-    $('#loadingSpinner').removeClass('show');
-    $('#productsGrid').removeClass('loading');
+    $('#skeletonGrid').fadeOut(150, function() {
+      $(this).removeClass('show');
+      $('#productsGrid').hide().fadeIn(250);
+    });
   }
 
   function bindEvents() {

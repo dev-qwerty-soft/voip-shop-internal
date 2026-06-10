@@ -408,8 +408,20 @@ get_header();
             </div>
 
 
-            <div class="loading-spinner" id="loadingSpinner">
-              <div class="spinner"></div>
+            <div class="skeleton-grid" id="skeletonGrid">
+              <?php for ($i = 0; $i < 16; $i++): ?>
+                <div class="skeleton-card">
+                  <div class="skeleton-card__image"></div>
+                  <div class="skeleton-card__content">
+                    <div class="skeleton-card__title"></div>
+                    <div class="skeleton-card__title"></div>
+                    <div class="skeleton-card__bottom">
+                      <div class="skeleton-card__price"></div>
+                      <div class="skeleton-card__btn"></div>
+                    </div>
+                  </div>
+                </div>
+              <?php endfor; ?>
             </div>
 
             <div class="no-products" id="noProducts" style="display: none;">

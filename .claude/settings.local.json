@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /e/Work/Work\\\\\\(WP\\\\\\)/Local/voipx-shop-internal/app/public/wp-content/themes/voip-theme && ls -la | head -20)",
+      "Read(//e/e/Work/Work\\(WP\\)/Local/voipx-shop-internal/app/public/wp-content/themes/**)"
+    ]
+  }
+}

@@ -65,6 +65,62 @@
     }
   }
 
+  &__cart {
+    display: flex;
+    align-items: center;
+    padding: get-d(8px) get-d(16px);
+    border-radius: get-d(36px);
+    border: solid 1px $color-grey-md;
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-grey-light;
+    font-size: get-d(14px);
+    line-height: get-d(20px);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: get-d(36px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: -1;
+    }
+
+    &:hover {
+      color: $color-white;
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    @include respond(lg) {
+      padding: get-lg(8px) get-lg(12px);
+      border-radius: get-lg(36px);
+      font-size: get-lg(12px);
+      line-height: get-d(18px);
+
+      &::before {
+        border-radius: get-lg(36px);
+      }
+    }
+
+    svg {
+      width: get-d(18px);
+      height: get-d(18px);
+      flex-shrink: 0;
+      margin-right: get-d(4px);
+
+      @include respond(lg) {
+        width: get-lg(18px);
+        height: get-lg(18px);
+        margin-right: get-lg(4px);
+      }
+    }
+  }
+
   &__nav {
     position: relative;
 
