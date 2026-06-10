@@ -106,9 +106,7 @@ $open_support_link = get_field('support_ticket_link', 'options');
             $open_support_link
           ]);
 
-          $cards_count = count($cards);
-
-        ?>
+          $cards_count = count($cards); ?>
           <ul class="footer__cards <?= $cards_count === 2 ? 'footer__cards--two' : '' ?>">
             <?php if ($help_center_link): ?>
               <li>
