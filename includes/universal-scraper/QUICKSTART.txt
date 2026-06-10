@@ -1,0 +1,50 @@
+=================================================
+  UNIVERSAL SCRAPER - Quick Start Guide
+=================================================
+
+Ì≥¶ ALL FILES IN ONE FOLDER!
+
+This folder contains everything needed for content scraping.
+
+
+Ì∫Ä HOW TO TRANSFER TO ANOTHER THEME:
+-------------------------------------
+
+1. Copy ENTIRE folder "universal-scraper"
+
+2. Paste it to new theme:
+   wp-content/themes/YOUR-NEW-THEME/includes/universal-scraper/
+
+3. Open functions.php in new theme
+
+4. Add at the end of file:
+
+   require_once get_template_directory() . '/includes/universal-scraper/init.php';
+
+5. DONE! Refresh WordPress Admin and see "Content Scraper" menu
+
+
+Ì≥Ç FILE STRUCTURE:
+------------------
+‚úÖ init.php              - Main file (loads everything)
+‚úÖ site-scraper.php      - Content scraping
+‚úÖ content-importer.php  - Import to WooCommerce  
+‚úÖ admin-page.php        - Admin panel
+‚úÖ admin.js              - JavaScript
+‚úÖ admin.css             - Styles
+
+
+‚ö†Ô∏è REQUIREMENTS:
+----------------
+- WordPress 5.0+
+- WooCommerce 3.0+ (REQUIRED!)
+- PHP 7.0+
+
+
+Ì∞õ TROUBLESHOOTING:
+-------------------
+If not working:
+1. Check WooCommerce is activated
+2. Check file paths
+3. Clear WordPress cache
+4. Check file permissions (644)

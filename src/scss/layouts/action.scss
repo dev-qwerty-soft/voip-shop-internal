@@ -1,0 +1,90 @@
+.action {
+  padding: get-d(200px) 0 get-d(240px);
+  position: relative;
+
+  @include respond(lg) {
+    padding: get-lg(200px) 0 get-lg(240px);
+  }
+
+  @include respond(md) {
+    padding: 124px 0 178px;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__wrap {
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: get-d(20px);
+    margin-top: get-d(40px);
+
+    @include respond(lg) {
+      gap: get-lg(20px);
+      margin-top: get-lg(40px);
+    }
+
+    @include respond(md) {
+      gap: 8px;
+      margin-top: 20px;
+      flex-direction: column;
+    }
+
+    .btn {
+      cursor: pointer;
+      @include respond(md) {
+        min-width: 217px;
+      }
+    }
+  }
+
+  .title {
+    font-size: get-d(52px);
+
+    @include respond(lg) {
+      font-size: get-lg(52px);
+    }
+
+    @include respond(md) {
+      font-size: 28px;
+    }
+  }
+
+  .simple-text {
+    margin: get-d(20px) auto 0;
+    max-width: get-d(480px);
+    width: 100%;
+
+    @include respond(lg) {
+      margin: get-lg(20px) auto 0;
+      max-width: get-lg(480px);
+    }
+
+    @include respond(md) {
+      margin: 12px auto 0;
+      max-width: 100%;
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: -1;
+
+    @include respond(md) {
+      bottom: 65px;
+      width: 150%;
+    }
+  }
+}

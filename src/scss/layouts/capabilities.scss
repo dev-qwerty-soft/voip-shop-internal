@@ -1,0 +1,213 @@
+.capabilities {
+  padding: get-d(70px) 0 get-d(100px);
+
+  @include respond(lg) {
+    padding: get-lg(70px) 0 get-lg(100px);
+  }
+
+  @include respond(lg) {
+    padding: 50px 0;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .simple-text {
+    margin: get-d(20px) auto 0;
+    width: 100%;
+    max-width: get-d(720px);
+
+    @include respond(lg) {
+      margin: get-lg(20px) auto 0;
+      max-width: get-lg(720px);
+    }
+
+    @include respond(lg) {
+      margin: 20px auto 0;
+      max-width: 100%;
+    }
+  }
+
+  &+.faq {
+    padding-bottom: get-d(200px);
+
+    @include respond(lg) {
+      padding-bottom: get-lg(200px);
+    }
+
+    @include respond(lg) {
+      padding-bottom: 100px;
+    }
+  }
+
+  &__wrap,
+  &__slider .swiper-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: get-d(24px);
+    margin-top: get-d(40px);
+
+    @include respond(lg) {
+      gap: get-lg(24px);
+      margin-top: get-lg(40px);
+    }
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    &--four {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &__slider {
+    @include respond(lg) {
+      width: 90%;
+    }
+
+    .swiper-wrapper {
+      @include respond(lg) {
+        display: flex;
+        gap: 0 !important;
+      }
+    }
+  }
+
+  &--slider {
+    .capabilities__wrap {
+      display: block;
+    }
+
+    .capabilities__item {
+      min-height: get-d(400px);
+
+      @include respond(lg) {
+        min-height: get-lg(400px);
+      }
+
+      @include respond(md) {
+        min-height: 300px;
+      }
+    }
+  }
+
+  &__item {
+    padding: get-d(32px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: get-d(236px);
+    border-radius: get-d(36px);
+    background-color: rgba($color-dark-blue, 0.2);
+    gap: get-d(28px);
+    border: solid 1px rgba($color-light-blue, 0.4);
+    transition: all 0.3s ease;
+    height: stretch;
+
+    @include respond(lg) {
+      padding: get-lg(32px);
+      gap: get-lg(28px);
+      min-height: get-lg(236px);
+      border-radius: get-lg(36px);
+    }
+
+    @include respond(md) {
+      padding: 20px;
+      gap: 20px;
+      min-height: auto;
+      border-radius: 24px;
+      height: auto;
+    }
+
+    &:hover {
+      border-color: rgba($color-light-blue, 1);
+    }
+
+    &-icon {
+      width: get-d(68px);
+      height: get-d(68px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      border: solid 1px rgba($color-white, 0.14);
+      background-color: rgba($color-white, 0.06);
+
+      @include respond(lg) {
+        width: get-lg(68px);
+        height: get-lg(68px);
+      }
+
+      @include respond(md) {
+        width: 52px;
+        height: 52px;
+      }
+
+      img {
+        width: get-d(36px);
+        height: get-d(36px);
+        object-fit: contain;
+
+        @include respond(lg) {
+          width: get-lg(36px);
+          height: get-lg(36px);
+        }
+
+        @include respond(md) {
+          width: 28px;
+          height: 28px;
+        }
+      }
+    }
+
+    &-title {
+      font-weight: 600;
+      font-size: get-d(20px);
+      line-height: get-d(24px);
+
+      @include respond(lg) {
+        font-size: get-lg(20px);
+        line-height: get-lg(24px);
+      }
+
+      @include respond(md) {
+        font-size: 16px;
+        line-height: 20px;
+      }
+    }
+
+    &-text {
+      margin-top: get-d(12px);
+
+      @include respond(lg) {
+        margin-top: get-lg(12px);
+      }
+
+      @include respond(md) {
+        margin-top: 12px;
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: center;
+    margin-top: get-d(40px);
+
+    @include respond(lg) {
+      margin-top: get-lg(40px);
+    }
+
+    @include respond(md) {
+      margin-top: 24px;
+    }
+  }
+
+  &__text {
+    text-align: center;
+  }
+}

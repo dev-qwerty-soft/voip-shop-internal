@@ -1,0 +1,200 @@
+// WooCommerce Notices
+.woocommerce-notices-wrapper,
+.forminator-notices-wrapper {
+  position: fixed;
+  top: get-d(80px);
+  right: get-d(20px);
+  z-index: 9999;
+  max-width: get-d(400px);
+  width: 100%;
+
+  @include respond(lg) {
+    top: get-lg(80px);
+    right: get-lg(20px);
+    max-width: get-lg(400px);
+  }
+
+  @include respond(md) {
+    top: 80px;
+    right: 20px;
+    left: 20px;
+    max-width: calc(100% - 40px);
+  }
+}
+
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+  position: relative;
+  padding: get-d(16px) get-d(20px);
+  border-radius: get-d(12px);
+  margin-bottom: get-d(12px);
+  display: flex;
+  align-items: center;
+  gap: get-d(12px);
+  box-shadow: 0 get-d(8px) get-d(24px) rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  animation:
+    slideInRight 0.3s ease-out,
+    fadeOut 0.3s ease-out 4.7s forwards;
+  font-size: get-d(14px);
+  line-height: 1.5;
+
+  @include respond(lg) {
+    padding: get-lg(16px) get-lg(20px);
+    border-radius: get-lg(12px);
+    margin-bottom: get-lg(12px);
+    gap: get-lg(12px);
+    box-shadow: 0 get-lg(8px) get-lg(24px) rgba(0, 0, 0, 0.3);
+    font-size: get-lg(14px);
+  }
+
+  @include respond(md) {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+  }
+
+  &::before {
+    display: none;
+  }
+
+  a.button {
+    display: inline-flex;
+    align-items: center;
+    padding: get-d(8px) get-d(16px);
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    border-radius: get-d(8px);
+    font-size: get-d(13px);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-left: auto;
+    white-space: nowrap;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    @include respond(lg) {
+      padding: get-lg(8px) get-lg(16px);
+      border-radius: get-lg(8px);
+      font-size: get-lg(13px);
+    }
+
+    @include respond(md) {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Success message (added to cart)
+.woocommerce-message {
+  background: linear-gradient(135deg, rgba(61, 84, 255, 0.95) 0%, rgba(45, 62, 189, 0.95) 100%);
+  border: 1px solid rgba(61, 84, 255, 0.3);
+  color: #fff;
+
+  &::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6L9 17L4 12' stroke='%2344D62C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+
+// Info message
+.woocommerce-info {
+  background: linear-gradient(135deg, rgba(61, 84, 255, 0.95) 0%, rgba(45, 62, 189, 0.95) 100%);
+  border: 1px solid rgba(61, 84, 255, 0.3);
+  color: #fff;
+
+  &::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' stroke='%233D54FF' stroke-width='2'/%3E%3Cpath d='M12 16V12M12 8H12.01' stroke='%233D54FF' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
+
+// Error message
+.woocommerce-error {
+  background: linear-gradient(135deg, rgba(255, 85, 33, 0.95) 0%, rgba(189, 45, 45, 0.95) 100%);
+  border: 1px solid rgba(255, 85, 33, 0.3);
+  color: #fff;
+
+  &::before {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='10' stroke='%23FF5521' stroke-width='2'/%3E%3Cpath d='M12 8V12M12 16H12.01' stroke='%23FF5521' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
+
+// Animations
+@keyframes slideInRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(400px);
+  }
+}
+
+// Progress bar
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: get-d(3px);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 0 0 get-d(12px) get-d(12px);
+    animation: progressBar 5s linear forwards;
+
+    @include respond(lg) {
+      height: get-lg(3px);
+      border-radius: 0 0 get-lg(12px) get-lg(12px);
+    }
+
+    @include respond(md) {
+      height: 3px;
+      border-radius: 0 0 12px 12px;
+    }
+  }
+}
+
+@keyframes progressBar {
+  from {
+    width: 100%;
+  }
+
+  to {
+    width: 0%;
+  }
+}
+
+.forminator-notices-wrapper {
+  .woocommerce-message {
+    background: linear-gradient(135deg, rgba(5, 164, 11, 0.95) 0%, rgba(0, 99, 17, 0.95) 100%);
+    border: 1px solid rgba(5, 164, 11, 0.95);
+    color: #fff;
+    overflow: hidden;
+  }
+}

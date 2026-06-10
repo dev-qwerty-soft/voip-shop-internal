@@ -1,0 +1,338 @@
+.contacts {
+  padding: get-d(112px) 0 get-d(140px);
+
+  @include respond(lg) {
+    padding: get-lg(112px) 0 get-lg(140px);
+  }
+
+  @include respond(md) {
+    padding: 112px 0 50px;
+  }
+
+  &__grid {
+    padding: get-d(32px);
+    border-radius: get-d(36px);
+    background-color: rgba($color-dark-blue, 0.2);
+    border: solid 1px rgba($color-light-blue, 0.4);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: get-d(20px) get-d(40px);
+
+    @include respond(lg) {
+      padding: get-lg(32px);
+      border-radius: get-lg(36px);
+      gap: get-lg(40px);
+    }
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      padding: 0;
+      border: none;
+      gap: 60px;
+    }
+  }
+
+  &__col {
+    &:nth-child(1) {
+      grid-area: 1 / 1 / 2 / 2;
+
+      @include respond(md) {
+        grid-area: auto;
+      }
+    }
+
+    &:nth-child(2) {
+      grid-area: 1 / 2 / 3 / 3;
+
+      @include respond(md) {
+        grid-area: auto;
+      }
+    }
+
+    &:nth-child(3) {
+      grid-area: 2 / 1 / 3 / 2;
+
+      @include respond(md) {
+        grid-area: auto;
+      }
+    }
+
+    &--head {
+      .title {
+        @include respond(md) {
+          font-weight: 600;
+        }
+      }
+
+      .simple-text {
+        margin-top: get-d(12px);
+
+        @include respond(lg) {
+          margin-top: get-lg(12px);
+        }
+
+        @include respond(md) {
+          margin-top: 12px;
+        }
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: get-d(4px);
+        margin-top: get-d(20px);
+        cursor: pointer;
+
+        @include respond(lg) {
+          gap: get-lg(4px);
+          margin-top: get-lg(20px);
+        }
+
+        @include respond(md) {
+          margin-top: 20px;
+          gap: 7px;
+          width: 100%;
+          justify-content: center;
+        }
+
+        svg {
+          width: get-d(24px);
+          height: get-d(24px);
+          flex: none;
+
+          @include respond(lg) {
+            width: get-lg(24px);
+            height: get-lg(24px);
+          }
+
+          @include respond(md) {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+
+    &-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: get-d(20px);
+      width: 100%;
+
+      @include respond(lg) {
+        gap: get-lg(20px);
+      }
+
+      @include respond(md) {
+        gap: 16px;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+    }
+
+    &--grid {
+      align-items: flex-end;
+      display: flex;
+    }
+
+    &--form {
+      padding: get-d(32px);
+      border-radius: get-d(24px);
+      background-color: rgba($color-white, 0.06);
+      border: solid 1px rgba($color-white, 0.14);
+      position: relative;
+
+      @include respond(lg) {
+        padding: get-lg(32px);
+        border-radius: get-lg(24px);
+      }
+
+      @include respond(md) {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .forminator-col {
+        padding: 0 get-d(10px) !important;
+
+        @include respond(lg) {
+          padding: 0 get-lg(10px) !important;
+        }
+      }
+
+      .forminator-success {
+        display: none !important;
+      }
+
+      .forminator-loading {
+        position: absolute !important;
+        z-index: 1;
+        top: 10px;
+        left: 50%;
+        width: 70%;
+        transform: translateX(-50%);
+      }
+
+      .forminator-custom-form {
+        margin: 0 !important;
+      }
+
+      .forminator-row-last {
+        margin: 0 !important;
+
+        @include respond(lg) {
+          margin-bottom: get-lg(60px) !important;
+        }
+
+        @include respond(lg) {
+          margin-bottom: 60px !important;
+        }
+
+        .forminator-col {
+          padding: 0 !important;
+        }
+      }
+
+      .forminator-button-submit {
+        padding: get-d(10px) get-d(20px) !important;
+        border-radius: get-d(28px) !important;
+
+        @include respond(lg) {
+          padding: get-lg(10px) get-lg(20px) !important;
+          border-radius: get-lg(28px) !important;
+        }
+
+        @include respond(md) {
+          padding: 10px 20px !important;
+          border-radius: 28px !important;
+        }
+      }
+
+      .form-checkouts {
+        .forminator-label {
+          grid-column: span 3;
+
+          @include respond(lg) {
+            grid-column: span 2;
+          }
+
+          @include respond(md) {
+            grid-column: span 1;
+          }
+        }
+
+        .forminator-field {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(2, 1fr);
+          gap: get-d(12.5px) get-d(10px);
+
+          @include respond(lg) {
+            grid-template-columns: 1fr 1fr;
+            gap: get-lg(12.5px) get-lg(10px);
+          }
+
+          @include respond(md) {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+        }
+
+        .forminator-label{
+          grid-area: 1 / 1 / 2 / 4;
+        }
+
+        .forminator-checkbox-label {
+          margin-left: get-d(4px) !important;
+          font-size: get-d(14px);
+
+          @include respond(lg) {
+            margin-left: get-lg(4px) !important;
+            font-size: get-lg(14px);
+          }
+
+          @include respond(md) {
+            margin-left: 4px !important;
+            font-size: 14px;
+          }
+        }
+      }
+
+      .input-contact-html {
+        color: $color-grey-md !important;
+        font-size: get-d(12px) !important;
+        line-height: get-d(16px) !important;
+        padding-left: get-d(195px) !important;
+        position: absolute;
+        right: get-d(32px);
+        bottom: get-d(30px);
+
+        @include respond(lg) {
+          font-size: get-lg(12px) !important;
+          line-height: get-lg(16px) !important;
+          padding-left: 0 !important;
+          right: get-lg(20px);
+          bottom: get-lg(30px);
+          left: get-lg(32px);
+        }
+
+        @include respond(md) {
+          font-size: 12px !important;
+          line-height: 16px !important;
+          left: 20px;
+          right: 20px;
+          bottom: 20px;
+        }
+      }
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: get-d(8px);
+    padding: get-d(20px);
+    background-color: rgba($color-white, 0.06);
+    border: solid 1px rgba($color-white, 0.14);
+    border-radius: get-d(24px);
+
+    @include respond(lg) {
+      gap: get-lg(8px);
+      padding: get-lg(20px);
+      border-radius: get-lg(24px);
+    }
+
+    @include respond(md) {
+      min-height: 124px;
+      gap: 8px;
+      padding: 20px;
+      border-radius: 24px;
+    }
+
+    &:last-child {
+      grid-column: span 2;
+
+      @include respond(md) {
+        grid-column: auto;
+      }
+    }
+
+    &-text {
+      font-size: get-d(20px);
+      line-height: 120%;
+
+      @include respond(lg) {
+        font-size: get-lg(20px);
+      }
+
+      @include respond(md) {
+        font-size: 20px;
+      }
+    }
+  }
+}

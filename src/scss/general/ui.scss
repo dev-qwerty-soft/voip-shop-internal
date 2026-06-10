@@ -1,0 +1,55 @@
+.title-label {
+  padding: get-d(8px) get-d(16px);
+  color: $color-main-orange;
+  background-color: rgba($color-white, 0.06);
+  border-radius: get-d(36px);
+  font-size: get-d(14px);
+  display: inline-block;
+  font-weight: 700;
+  position: relative;
+
+  @include respond(lg) {
+    padding: get-lg(8px) get-lg(16px);
+    border-radius: get-lg(36px);
+    font-size: get-lg(14px);
+  }
+
+  @include respond(md) {
+    padding: 8px 16px;
+    border-radius: 36px;
+    font-size: 14px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: get-d(36px);
+    padding: get-d(1.5px);
+    background: linear-gradient(15deg, rgba(255, 85, 33, 0.4) 0%, rgba(255, 85, 33, 0) 100%);
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    pointer-events: none;
+
+    @include respond(lg) {
+      border-radius: get-lg(36px);
+      padding: get-lg(1.5px);
+    }
+
+    @include respond(md) {
+      border-radius: 36px;
+      padding: 1.5px;
+    }
+  }
+
+  &--blue {
+    color: $color-light-blue;
+
+    &::before {
+      background: linear-gradient(15deg, $color-light-blue 0%, rgba(255, 85, 33, 0) 100%);
+    }
+  }
+}

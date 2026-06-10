@@ -1,0 +1,116 @@
+.promo {
+    margin: get-d(50px) 0;
+
+    @include respond(lg) {
+        margin: get-lg(50px) 0;
+    }
+
+    @include respond(md) {
+        margin: 50px 0;
+        padding: 0 16px;
+        max-width: calc(100% - 32px);
+    }
+
+    .container {
+        padding: get-d(90px) get-d(40px) get-d(162px);
+        text-align: center;
+        background: linear-gradient(180deg, $color-black 0%, rgba(4, 8, 19, 0.30) 100%);
+        border-radius: get-d(36px);
+        position: relative;
+        overflow: hidden;
+
+        @include respond(lg) {
+            padding: get-lg(90px) get-lg(40px) get-lg(162px);
+            border-radius: get-lg(36px);
+        }
+
+        @include respond(md) {
+            padding: 60px 16px 140px;
+            border-radius: 36px;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__logo {
+        max-width: get-d(150px);
+        width: 100%;
+
+        @include respond(lg) {
+            max-width: get-lg(150px);
+        }
+
+        @include respond(md) {
+            max-width: 150px;
+        }
+    }
+
+    .title {
+        max-width: get-d(640px);
+        margin-top: get-d(48px);
+
+        @include respond(lg) {
+            max-width: get-lg(640px);
+            margin-top: get-lg(48px);
+        }
+
+        @include respond(md) {
+            max-width: 100%;
+            margin-top: 48px;
+        }
+    }
+
+    &__subtitle {
+        margin-top: get-d(20px);
+        font-size: get-d(20px);
+        line-height: get-d(24px);
+        font-weight: 600;
+
+        @include respond(lg) {
+            margin-top: get-lg(20px);
+            font-size: get-lg(20px);
+            line-height: get-lg(24px);
+        }
+
+        @include respond(md) {
+            margin-top: 20px;
+            font-size: 20px;
+            line-height: 24px;
+        }
+    }
+
+    &__text {
+        margin-top: get-d(8px);
+        max-width: get-d(700px);
+
+        @include respond(lg) {
+            max-width: get-lg(700px);
+            margin-top: get-lg(8px);
+        }
+
+        @include respond(md) {
+            max-width: 100%;
+            margin-top: 8px;
+        }
+    }
+
+    &__bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

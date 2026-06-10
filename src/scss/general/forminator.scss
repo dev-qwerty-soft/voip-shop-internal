@@ -1,0 +1,280 @@
+.forminator-edit-module {
+  display: none;
+}
+
+.forminator-input {
+  background-color: rgba($color-white, 0.14);
+  border-radius: get-d(20px) !important;
+  padding: get-d(8px) get-d(16px);
+  font-weight: 600;
+  color: $color-white;
+
+  @include respond(lg) {
+    border-radius: get-lg(20px) !important;
+    padding: get-lg(8px) get-lg(16px);
+  }
+
+  @include respond(md) {
+    border-radius: 20px !important;
+    padding: 8px 16px;
+  }
+
+  &::placeholder {
+    font-family: 'Mulish';
+    font-weight: 600;
+    color: $color-grey-md;
+  }
+}
+
+.forminator-button {
+  background-color: $color-main;
+  color: $color-white;
+  padding: get-d(8px) get-d(16px);
+  font-weight: 700;
+  font-size: get-d(14px);
+  border-radius: get-d(20px);
+  font-family: 'Mulish';
+  transition: 0.3s ease;
+  white-space: nowrap;
+
+  @include respond(lg) {
+    padding: get-lg(8px) get-lg(16px);
+    font-size: get-lg(14px);
+    border-radius: get-lg(20px);
+  }
+
+  @include respond(md) {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+
+  &:hover {
+    color: $color-main;
+    background-color: $color-white;
+  }
+}
+
+.forminator-field {
+  .iti__country-container {
+    display: none !important;
+  }
+}
+
+.forminator-error-message {
+  display: inline-block !important;
+  color: #ed5252 !important;
+  padding-top: get-d(8px) !important;
+  background-color: transparent !important;
+  font-size: get-d(14px) !important;
+  line-height: get-d(18px) !important;
+  margin: 0 !important;
+
+  @include respond(lg) {
+    padding-top: get-lg(8px) !important;
+    font-size: get-lg(14px) !important;
+    line-height: get-lg(18px) !important;
+  }
+
+  @include respond(md) {
+    padding-top: 8px !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+  }
+}
+
+.forminator-has_error input {
+  border-color: #ed5252 !important;
+}
+
+.forminator-checkbox {
+  &-box {
+    background-color: transparent !important;
+    border: solid get-d(1.5px) $color-grey-md !important;
+    width: get-d(15px) !important;
+    height: get-d(15px) !important;
+    flex: none !important;
+    transition: 0.3s ease;
+
+    @include respond(lg) {
+      border: solid get-lg(1.5px) $color-grey-md !important;
+      width: get-lg(15px) !important;
+      height: get-lg(15px) !important;
+    }
+
+    @include respond(md) {
+      border: solid 1.5px $color-grey-md !important;
+      width: 15px !important;
+      height: 15px !important;
+    }
+
+    &::before {
+      font-size: get-d(8px) !important;
+      color: $color-grey-dark !important;
+
+      @include respond(lg) {
+        font-size: get-lg(8px) !important;
+      }
+
+      @include respond(md) {
+        font-size: 8px !important;
+      }
+    }
+  }
+
+  &:hover {
+    .forminator-checkbox-box {
+      border-color: $color-white !important;
+    }
+  }
+}
+
+input:checked + .forminator-checkbox-box {
+  background-color: $color-grey-light !important;
+  border-color: $color-grey-light !important;
+}
+
+.input-agree {
+  .forminator-label {
+    display: none !important;
+  }
+
+  .forminator-checkbox-label {
+    font-weight: 500 !important;
+    color: $color-grey-md !important;
+    font-size: get-d(16px) !important;
+    line-height: get-d(26px) !important;
+
+    @include respond(lg) {
+      font-size: get-lg(16px) !important;
+      line-height: get-lg(26px) !important;
+    }
+
+    @include respond(md) {
+      font-size: 14px !important;
+      line-height: 20px !important;
+    }
+  }
+}
+
+.select2-selection__placeholder {
+  color: $color-grey-md !important;
+}
+
+.select2-results__option,
+.forminator-dropdown--default {
+  background-color: #393b45 !important;
+  border-color: #393b45 !important;
+}
+
+.select2-results__option--highlighted,
+.select2-selection__rendered,
+.select2-container--open .select2-selection__arrow,
+.select2-selection--single:focus {
+  outline: none !important;
+  color: $color-white !important;
+}
+
+.select2-results__option.select2-results__option--selected {
+  background-color: $color-main !important;
+  color: $color-white !important;
+}
+
+.select2-selection {
+  background-color: rgba($color-white, 0.14) !important;
+  border: solid 1px transparent !important;
+  border-radius: get-d(100px) !important;
+
+  &:hover {
+    border-color: $color-grey-light !important;
+
+    .select2-selection__arrow,
+    .select2-selection__placeholder {
+      color: $color-grey-light !important;
+    }
+  }
+
+  &__rendered {
+    font-size: get-d(14px) !important;
+    padding: get-d(12px) !important;
+
+    @include respond(lg) {
+      font-size: get-lg(14px) !important;
+      padding: get-lg(12px) !important;
+    }
+
+    @include respond(md) {
+      font-size: 14px !important;
+      padding: 12px !important;
+    }
+  }
+}
+
+.forminator-input {
+  font-size: get-d(14px) !important;
+  border: solid 1px transparent !important;
+  background-color: rgba($color-white, 0.14) !important;
+  padding: get-d(12px) !important;
+
+  @include respond(lg) {
+    font-size: get-lg(14px) !important;
+    padding: get-lg(12px) !important;
+  }
+
+  @include respond(md) {
+    font-size: 14px !important;
+    padding: 12px !important;
+  }
+
+  &::placeholder {
+    transition: 0.3s ease;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: $color-grey-light !important;
+    outline: none !important;
+
+    &::placeholder {
+      color: $color-grey-light !important;
+    }
+  }
+}
+
+.forminator-checkbox {
+  margin: 0 !important;
+}
+
+.forminator-button-submit {
+  font-weight: 700 !important;
+  font-size: get-d(16px) !important;
+
+  @include respond(lg) {
+    font-size: get-lg(16px) !important;
+  }
+
+  @include respond(md) {
+    font-size: 16px !important;
+  }
+}
+
+.forminator-label {
+  font-size: get-d(16px) !important;
+  line-height: get-d(24px) !important;
+  font-weight: 400 !important;
+  margin-bottom: get-d(6px) !important;
+
+  @include respond(lg) {
+    font-size: get-lg(16px) !important;
+    line-height: get-lg(24px) !important;
+    margin-bottom: get-lg(6px) !important;
+  }
+
+  @include respond(md) {
+    font-size: 16px !important;
+    line-height: 24px !important;
+    margin-bottom: 6px !important;
+  }
+}
+
+

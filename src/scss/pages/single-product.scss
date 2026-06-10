@@ -1,0 +1,1040 @@
+.custom-product {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    gap: get-d(32px);
+
+    @include respond(lg) {
+      gap: get-lg(32px);
+    }
+
+    @include respond(md) {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  &__gallery,
+  .summary {
+    width: calc(50% - get-d(16px));
+
+    @include respond(lg) {
+      width: calc(50% - get-lg(16px));
+    }
+
+    @include respond(md) {
+      width: 100%;
+    }
+  }
+
+  &__swiper {
+    height: get-d(470px);
+    border-radius: get-d(30px);
+    overflow: hidden;
+    background-color: $color-white;
+    position: relative;
+
+    @include respond(lg) {
+      height: get-lg(470px);
+      border-radius: get-lg(30px);
+    }
+
+    @include respond(md) {
+      height: 470px;
+      border-radius: 30px;
+    }
+
+    @include respond(sm) {
+      height: 277px;
+    }
+
+    img {
+      object-fit: contain;
+    }
+  }
+
+  &__thumb {
+    margin-top: get-d(20px);
+
+    @include respond(lg) {
+      margin-top: get-lg(20px);
+    }
+
+    @include respond(md) {
+      margin-top: 20px;
+    }
+
+    .swiper-slide {
+      height: get-d(116px);
+      border-radius: get-d(24px);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: solid 1px transparent;
+      transition: 0.3s ease;
+
+      @include respond(lg) {
+        height: get-lg(116px);
+        border-radius: get-lg(24px);
+      }
+
+      @include respond(md) {
+        height: 100px;
+        border-radius: 20px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(#000, 0.4);
+        transition: 0.3s ease;
+      }
+
+      &.swiper-slide-thumb-active {
+        border-color: $color-white;
+
+        &::after {
+          background-color: rgba(#000, 0);
+        }
+      }
+
+      img {
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .product_title {
+    font-weight: 600;
+    font-size: get-d(34px);
+    line-height: get-d(44px);
+
+    @include respond(lg) {
+      font-size: get-lg(34px);
+      line-height: get-lg(44px);
+    }
+
+    @include respond(md) {
+      font-size: 26px;
+      line-height: 34px;
+    }
+  }
+
+  .price {
+    margin-top: get-d(20px);
+    font-weight: 700;
+    font-size: get-d(42px);
+    line-height: get-d(54px);
+
+    @include respond(lg) {
+      margin-top: get-lg(20px);
+      font-size: get-lg(42px);
+      line-height: get-lg(54px);
+    }
+
+    @include respond(md) {
+      margin-top: 20px;
+      font-size: 32px;
+      line-height: 40px;
+    }
+  }
+
+  .product-configuration {
+    margin-top: get-d(30px);
+
+    @include respond(lg) {
+      margin-top: get-lg(30px);
+    }
+
+    @include respond(md) {
+      margin-top: 30px;
+    }
+
+    &__title {
+      font-size: get-d(16px);
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: get-d(16px);
+
+      @include respond(lg) {
+        font-size: get-lg(16px);
+        margin-bottom: get-lg(16px);
+      }
+
+      @include respond(md) {
+        font-size: 16px;
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  .variations {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: get-d(16px);
+    margin-bottom: get-d(20px);
+
+    @include respond(lg) {
+      gap: get-lg(16px);
+      margin-bottom: get-lg(20px);
+    }
+
+    @include respond(md) {
+      gap: 16px;
+      margin-bottom: 20px;
+      grid-template-columns: 1fr;
+    }
+
+    .value {
+      position: relative;
+
+      label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: get-d(12px);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: get-d(14px);
+        padding: get-d(14px) get-d(40px) get-d(14px) get-d(16px);
+        appearance: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3e%3cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/%3e%3c/svg%3e');
+        background-repeat: no-repeat;
+        background-position: right get-d(16px) center;
+
+        @include respond(lg) {
+          border-radius: get-lg(12px);
+          font-size: get-lg(14px);
+          padding: get-lg(14px) get-lg(40px) get-lg(14px) get-lg(16px);
+          background-position: right get-lg(16px) center;
+        }
+
+        @include respond(md) {
+          border-radius: 12px;
+          font-size: 14px;
+          padding: 14px 40px 14px 16px;
+          background-position: right 16px center;
+        }
+
+        &:hover {
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &:focus {
+          outline: none;
+          border-color: #3d54ff;
+        }
+
+        option {
+          background: #1a1c28;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    &:hover {
+      svg {
+        transform: scale(1.15);
+      }
+    }
+
+    svg {
+      width: get-d(20px);
+      height: get-d(20px);
+      transition: 0.3s ease;
+
+      @include respond(lg) {
+        width: get-lg(20px);
+        height: get-lg(20px);
+      }
+
+      @include respond(md) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    &-next {
+      right: get-d(6px);
+
+      @include respond(md) {
+        right: 2px;
+      }
+    }
+
+    &-prev {
+      left: get-d(6px);
+
+      @include respond(md) {
+        left: 2px;
+      }
+
+      svg {
+        transform: rotate(180deg);
+      }
+
+      &:hover {
+        svg {
+          transform: scale(1.15) rotate(180deg);
+        }
+      }
+    }
+
+    &.swiper-button-disabled {
+      opacity: 0.6;
+    }
+  }
+
+  .cart {
+    margin-top: get-d(30px);
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center;
+    gap: get-d(20px);
+
+    @include respond(lg) {
+      margin-top: get-lg(30px);
+      gap: get-lg(20px);
+    }
+
+    @include respond(md) {
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: get-d(8px);
+      border-radius: 50%;
+
+      @include respond(lg) {
+        gap: get-lg(8px);
+      }
+
+      @include respond(md) {
+        gap: 8px;
+      }
+
+      .screen-reader-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      .quantity-btn {
+        background: transparent;
+        border: none;
+        min-width: get-d(44px);
+        max-width: get-d(44px);
+        min-height: get-d(44px);
+        color: rgba(255, 255, 255, 0.6);
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.06);
+        cursor: pointer;
+        padding: get-d(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+
+        @include respond(lg) {
+          padding: get-lg(10px);
+          min-width: get-lg(44px);
+          max-width: get-lg(44px);
+          min-height: get-lg(44px);
+        }
+
+        @include respond(md) {
+          padding: 10px;
+          min-width: 44px;
+          max-width: 44px;
+          min-height: 44px;
+        }
+
+        svg {
+          width: get-d(12px);
+          height: get-d(12px);
+          transition: transform 0.2s ease;
+
+          @include respond(lg) {
+            width: get-lg(12px);
+            height: get-lg(12px);
+          }
+
+          @include respond(md) {
+            width: 12px;
+            height: 12px;
+          }
+        }
+
+        &:hover {
+          color: #807dfe;
+
+          svg {
+            transform: scale(1.1);
+          }
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+
+      .qty {
+        background: transparent;
+        border: none;
+        min-width: get-d(44px);
+        max-width: get-d(44px);
+        min-height: get-d(44px);
+        color: rgb(255, 255, 255);
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.06);
+        cursor: pointer;
+        padding: get-d(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        border-radius: 50%;
+        appearance: textfield;
+        -moz-appearance: textfield;
+
+        @include respond(lg) {
+          font-size: get-lg(16px);
+          min-width: get-lg(44px);
+          max-width: get-lg(44px);
+          min-height: get-lg(44px);
+        }
+
+        @include respond(md) {
+          font-size: 16px;
+          width: 40px;
+          min-width: 44px;
+          max-width: 44px;
+          min-height: 44px;
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .single_add_to_cart_button {
+      padding: get-d(10px) get-d(20px);
+      font-weight: 700;
+      background-color: $color-main !important;
+      color: $color-white;
+      font-size: get-d(14px);
+      border-radius: get-d(20px);
+      line-height: get-d(20px);
+      display: inline-block;
+      transition: 0.3s ease;
+      text-align: center;
+
+      @include respond(lg) {
+        padding: get-lg(10px) get-lg(20px);
+        font-size: get-lg(16px);
+        border-radius: get-lg(20px);
+        line-height: get-lg(20px);
+      }
+
+      @include respond(md) {
+        width: 100%;
+        border-radius: 28px;
+        font-size: 16px;
+        line-height: 20px;
+        padding: 10px 20px;
+      }
+
+      &:hover {
+        background-color: $color-dark-blue !important;
+      }
+
+      &:disabled,
+      &.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+
+        &:hover {
+          transform: none;
+        }
+      }
+    }
+  }
+}
+
+.woocommerce #content div.product div.images,
+.woocommerce div.product div.images,
+.woocommerce-page #content div.product div.images,
+.woocommerce-page div.product div.images {
+  float: none !important;
+}
+
+.custom-product-tabs {
+  margin-top: get-d(32px);
+
+  @include respond(lg) {
+    margin-top: get-lg(32px);
+  }
+
+  @include respond(md) {
+    margin-top: 60px;
+  }
+
+  .tabs-navigation {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    margin-bottom: get-d(16px);
+    border-radius: get-d(100px);
+    padding: get-d(6px);
+    background: rgba(255, 255, 255, 0.06);
+
+    .tabs-buttons {
+      display: flex;
+      align-items: center;
+    }
+
+    @include respond(lg) {
+      margin-bottom: get-lg(16px);
+      border-radius: get-lg(100px);
+      padding: get-lg(6px);
+    }
+
+    @include respond(md) {
+      height: 52px;
+      margin-bottom: 16px;
+      border-radius: 100px 0 0 100px;
+      padding: 6px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+
+      .tabs-buttons {
+        position: absolute;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .tab-button {
+      border: none;
+      display: flex;
+      padding: get-d(10px) get-d(24px);
+      justify-content: center;
+      align-items: center;
+      gap: get-d(10px);
+      background: transparent;
+      border-radius: get-d(100px);
+      cursor: pointer;
+      color: $color-grey-md;
+      font-size: get-d(20px);
+      font-weight: 600;
+      line-height: get-d(24px);
+      text-transform: capitalize;
+      position: relative;
+      transition: all 0.3s ease;
+
+      @include respond(lg) {
+        padding: get-lg(10px) get-lg(24px);
+        gap: get-lg(10px);
+        border-radius: get-lg(100px);
+        font-size: get-lg(20px);
+        line-height: get-lg(24px);
+      }
+
+      @include respond(md) {
+        padding: 10px 24px;
+        gap: 10px;
+        border-radius: 100px;
+        font-size: 20px;
+        line-height: 24px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      &.active,
+      &:hover {
+        color: #fff;
+        background: rgba(128, 125, 254, 0.4);
+      }
+    }
+  }
+
+  .tabs-content {
+    border-radius: get-d(20px);
+    background: var(--ui-black-white-6, rgba(255, 255, 255, 0.06));
+    padding: get-d(20px);
+
+    @include respond(lg) {
+      border-radius: get-lg(20px);
+      padding: get-lg(20px);
+    }
+
+    @include respond(md) {
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .tab-panel {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+
+      ul {
+        padding-left: get-d(20px);
+
+        li {
+          list-style: disc;
+        }
+
+        @include respond(lg) {
+          padding-left: get-lg(20px);
+        }
+
+        @include respond(md) {
+          padding-left: 20px;
+        }
+      }
+
+      ol {
+        padding-left: get-d(20px);
+
+        li {
+          list-style: auto;
+        }
+
+        @include respond(lg) {
+          padding-left: get-lg(20px);
+        }
+
+        @include respond(md) {
+          padding-left: 20px;
+        }
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: $color-white;
+      }
+    }
+
+    .character-counter {
+      background: #f5f5f5;
+      padding: get-d(8px) get-d(16px);
+      border-radius: get-d(4px);
+      margin-bottom: get-d(16px);
+      font-size: get-d(14px);
+      color: #666;
+
+      @include respond(lg) {
+        padding: get-lg(8px) get-lg(16px);
+        border-radius: get-lg(4px);
+        margin-bottom: get-lg(16px);
+        font-size: get-lg(14px);
+      }
+
+      @include respond(md) {
+        padding: 8px 16px;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        font-size: 14px;
+      }
+
+      .count {
+        font-weight: 600;
+        color: #000;
+      }
+    }
+
+    .product-description,
+    .product-key-features,
+    .product-details {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: max-height 0.3s ease;
+      gap: get-d(10px);
+
+      @include respond(lg) {
+        gap: get-lg(10px);
+      }
+
+      @include respond(md) {
+        gap: 10px;
+      }
+
+      &.has-read-more.collapsed {
+        max-height: get-d(150px);
+        overflow: hidden;
+
+        @include respond(lg) {
+          max-height: get-lg(150px);
+        }
+
+        @include respond(md) {
+          max-height: 250px;
+        }
+      }
+
+      h1,
+      h2 {
+        color: #fff !important;
+        font-weight: 600 !important;
+        font-size: get-d(20px) !important;
+        line-height: get-d(24px) !important;
+        text-transform: capitalize !important;
+
+        @include respond(lg) {
+          font-size: get-lg(20px) !important;
+          line-height: get-lg(24px) !important;
+        }
+
+        @include respond(md) {
+          font-size: 20px !important;
+          line-height: 24px !important;
+        }
+
+        * {
+          color: #fff !important;
+          font-weight: 600 !important;
+          font-size: get-d(20px) !important;
+          line-height: get-d(24px) !important;
+          text-transform: capitalize !important;
+
+          @include respond(lg) {
+            font-size: get-lg(20px) !important;
+            line-height: get-lg(24px) !important;
+          }
+
+          @include respond(md) {
+            font-size: 20px !important;
+            line-height: 24px !important;
+          }
+        }
+      }
+
+      h3,
+      h4 {
+        color: #d4d6e2 !important;
+        font-size: get-d(16px) !important;
+        font-weight: 500 !important;
+        line-height: get-d(24px) !important;
+
+        @include respond(lg) {
+          font-size: get-lg(16px) !important;
+          line-height: get-lg(24px) !important;
+        }
+
+        @include respond(md) {
+          font-size: 16px !important;
+          line-height: 24px !important;
+        }
+
+        * {
+          color: #d4d6e2 !important;
+          font-size: get-d(16px) !important;
+          font-weight: 500 !important;
+          line-height: get-d(24px) !important;
+
+          @include respond(lg) {
+            font-size: get-lg(16px) !important;
+            line-height: get-lg(24px) !important;
+          }
+
+          @include respond(md) {
+            font-size: 16px !important;
+            line-height: 24px !important;
+          }
+        }
+      }
+
+      div,
+      span,
+      p {
+        color: $color-grey-md;
+        font-size: get-d(16px);
+        font-weight: 500;
+        line-height: get-d(24px);
+
+        @include respond(lg) {
+          font-size: get-lg(16px);
+          line-height: get-lg(24px);
+        }
+
+        @include respond(md) {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+
+      ul,
+      ol {
+        display: flex;
+        flex-direction: column;
+        gap: get-d(4px);
+
+        @include respond(lg) {
+          gap: get-lg(4px);
+        }
+
+        @include respond(md) {
+          gap: 4px;
+        }
+
+        li {
+          color: $color-grey-md;
+          font-size: get-d(16px);
+          font-weight: 500;
+          line-height: get-d(24px);
+
+          @include respond(lg) {
+            font-size: get-lg(16px);
+            line-height: get-lg(24px);
+          }
+
+          @include respond(md) {
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+      }
+    }
+
+    .read-more-btn {
+      background: transparent;
+      border: none;
+      color: #807dfe;
+      font-size: get-d(16px);
+      font-weight: 700;
+      line-height: get-d(24px);
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 0;
+      margin-top: get-d(16px);
+      transition: all 0.3s ease;
+
+      @include respond(lg) {
+        font-size: get-lg(16px);
+        line-height: get-lg(24px);
+        margin-top: get-lg(16px);
+      }
+
+      @include respond(md) {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 16px;
+      }
+
+      &:hover {
+        color: #7f54b3;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+.woocommerce-tabs.wc-tabs-wrapper,
+.woocommerce-product-details__short-description {
+  display: none;
+}
+
+.summary.entry-summary {
+  form.cart:has(#yith-wapo-container .yith-wapo-block) {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+
+  .yith-wapo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: get-d(12px);
+    width: 100%;
+    margin-bottom: get-d(4px);
+
+    @include respond(lg) {
+      gap: get-lg(12px);
+      margin-bottom: get-lg(4px);
+    }
+
+    @include respond(md) {
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+  }
+
+  .yith-wapo-block {
+    width: calc(50% - 12px) !important;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+
+    @include respond(lg) {
+      width: 100% !important;
+    }
+  }
+
+  .yith-wapo-addon {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+
+    .addon-header {
+      h3.wapo-addon-title {
+        color: #d4d6e2;
+        font-size: get-d(16px);
+        line-height: 150%;
+        font-weight: 500;
+        margin: 0 0 get-d(8px) 0;
+        padding: 0;
+
+        @include respond(lg) {
+          font-size: get-lg(16px);
+          margin: 0 0 get-lg(8px) 0;
+        }
+
+        @include respond(md) {
+          font-size: 16px;
+          margin: 0 0 8px 0;
+        }
+
+        span {
+          color: #d4d6e2;
+        }
+      }
+    }
+
+    .options-container {
+      .options {
+        width: 100% !important;
+        margin: 0;
+        padding: 0;
+
+        select.yith-wapo-option-value {
+          width: 100% !important;
+          min-width: 100% !important;
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid transparent;
+          border-radius: get-d(100px);
+          color: rgba(255, 255, 255, 0.6);
+          font-size: get-d(14px);
+          font-weight: 400;
+          line-height: 1.4;
+          padding: get-d(14px) get-d(40px) get-d(14px) get-d(16px);
+          appearance: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3e%3cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/%3e%3c/svg%3e');
+          background-repeat: no-repeat;
+          background-position: right get-d(16px) center;
+          background-size: get-d(12px);
+
+          @include respond(lg) {
+            border-radius: get-lg(100px);
+            font-size: get-lg(14px);
+            padding: get-lg(14px) get-lg(40px) get-lg(14px) get-lg(16px);
+            background-position: right get-lg(16px) center;
+            background-size: get-lg(12px);
+          }
+
+          @include respond(md) {
+            border-radius: 100px;
+            font-size: 14px;
+            padding: 14px 40px 14px 16px;
+            background-position: right 16px center;
+            background-size: 12px;
+          }
+
+          &:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+          }
+
+          &:focus {
+            outline: none;
+            border-color: #3d54ff;
+            box-shadow: none;
+          }
+
+          option {
+            background: #1a1c28;
+            color: #fff;
+            padding: get-d(10px) get-d(16px);
+
+            @include respond(lg) {
+              padding: get-lg(10px) get-lg(16px);
+            }
+
+            @include respond(md) {
+              padding: 10px 16px;
+            }
+
+            &[value='default'] {
+              color: rgba(255, 255, 255, 0.4);
+            }
+          }
+        }
+      }
+
+      .option-description {
+        display: none;
+      }
+    }
+  }
+
+  #wapo-total-price-table {
+    display: none;
+  }
+}

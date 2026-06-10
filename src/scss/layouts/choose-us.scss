@@ -1,0 +1,240 @@
+.choose-us {
+  padding: get-d(100px) 0 get-d(50px);
+
+  @include respond(lg) {
+    padding: get-lg(100px) 0 get-lg(50px);
+  }
+
+  @include respond(md) {
+    padding: 50px 0;
+  }
+
+  &__wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: get-d(24px);
+
+    @include respond(lg) {
+      gap: get-lg(24px);
+    }
+
+    @include respond(md) {
+      gap: 16px;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+  }
+
+  &__box {
+    border-radius: get-d(36px);
+    background-color: $color-grey-dark;
+    border: get-d(18px) solid $color-dark-blue-2;
+    padding: get-d(22px);
+
+    @include respond(lg) {
+      border-radius: get-lg(36px);
+      border: get-lg(18px) solid $color-dark-blue-2;
+      padding: get-lg(22px);
+    }
+
+    @include respond(md) {
+      border-radius: 36px;
+      border: 12px solid $color-dark-blue-2;
+      padding: 16px;
+    }
+
+    &:nth-child(1) {
+      grid-area: 1 / 1 / 3 / 2;
+
+      @include respond(md) {
+        grid-area: auto;
+      }
+    }
+
+    &:nth-child(2) {
+      grid-area: 1 / 2 / 2 / 3;
+
+      @include respond(md) {
+        grid-area: auto;
+      }
+    }
+
+    &:nth-child(3) {
+      grid-area: 2 / 2 / 3 / 3;
+
+      @include respond(md) {
+        grid-area: auto;
+      }
+    }
+
+    .title {
+      margin-top: get-d(20px);
+
+      @include respond(lg) {
+        margin-top: get-lg(20px);
+      }
+
+      @include respond(md) {
+        margin-top: 12px;
+        font-size: 28px;
+        line-height: 36px;
+      }
+    }
+
+    .text {
+      margin-top: get-d(8px);
+      color: $color-grey-md;
+
+      @include respond(lg) {
+        margin-top: get-lg(8px);
+      }
+
+      @include respond(md) {
+        margin-top: 8px;
+      }
+    }
+
+    &-img {
+      margin-top: get-d(22px);
+      height: get-d(232px);
+      border-radius: get-d(24px);
+
+      @include respond(lg) {
+        margin-top: get-lg(22px);
+        height: get-lg(232px);
+        border-radius: get-lg(24px);
+      }
+
+      @include respond(md) {
+        margin-top: 40px;
+        height: 232px;
+        border-radius: 24px;
+      }
+    }
+
+    &--users {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: get-d(50px);
+
+      .pricing-card__users {
+        display: flex;
+        align-items: center;
+        gap: get-d(8px);
+
+        @include respond(lg) {
+          gap: get-lg(8px);
+        }
+
+        @include respond(md) {
+          gap: 8px;
+        }
+
+        &-more {
+          width: get-d(36px);
+          height: get-d(36px);
+          border-radius: 50%;
+          background: #807DFE;
+          font-size: get-d(12px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+
+          @include respond(lg) {
+            width: get-lg(36px);
+            height: get-lg(36px);
+            font-size: get-lg(12px);
+          }
+
+          @include respond(md) {
+            width: 36px;
+            height: 36px;
+            font-size: 12px;
+          }
+        }
+
+        img {
+          width: get-d(54px);
+          height: get-d(54px);
+          border-radius: 50%;
+
+          @include respond(lg) {
+            width: get-lg(54px);
+            height: get-lg(54px);
+          }
+
+          @include respond(md) {
+            width: 54px;
+            height: 54px;
+          }
+
+          &:nth-child(2) {
+            width: get-d(36px);
+            height: get-d(36px);
+
+            @include respond(lg) {
+              width: get-lg(36px);
+              height: get-lg(36px);
+            }
+
+            @include respond(md) {
+              width: 36px;
+              height: 36px;
+            }
+          }
+        }
+      }
+
+      @include respond(lg) {
+        gap: get-lg(50px);
+      }
+
+      @include respond(md) {
+        gap: 92px;
+      }
+
+      .title {
+        margin: 0;
+      }
+    }
+
+    &--quote {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-size: get-d(16px);
+      line-height: get-d(24px);
+      gap: get-d(36px);
+
+      @include respond(lg) {
+        font-size: get-lg(16px);
+        line-height: get-lg(24px);
+        gap: get-lg(36px);
+      }
+
+      @include respond(md) {
+        font-size: 16px;
+        line-height: 24px;
+        gap: 40px;
+      }
+
+      svg {
+        width: get-d(73px);
+        height: get-d(50px);
+
+        @include respond(lg) {
+          width: get-lg(73px);
+          height: get-lg(50px);
+        }
+
+        @include respond(md) {
+          width: 70px;
+          height: 50px;
+        }
+      }
+    }
+  }
+}

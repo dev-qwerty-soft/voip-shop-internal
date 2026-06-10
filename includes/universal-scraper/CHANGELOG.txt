@@ -1,0 +1,59 @@
+UNIVERSAL SCRAPER - CHANGELOG
+=============================
+
+Version 2.0 - January 6, 2026
+-----------------------------
+
+MAJOR CHANGES:
+
+1. FOLDER RENAMED
+   - OLD: voipx3-parser/
+   - NEW: universal-scraper/
+   
+2. FILES RENAMED FOR UNIVERSALITY
+   - product-scraper.php → site-scraper.php
+   - product-importer.php → content-importer.php
+   - СТАРТ.txt (Ukrainian) → QUICKSTART.txt (English)
+   
+3. CLASSES RENAMED
+   - Product_Scraper → Site_Content_Scraper
+   - Product_Importer → Content_Importer  
+   - Product_Import_Admin → Scraper_Admin_Page
+   
+4. COMPLETE INTERNATIONALIZATION
+   - ALL code comments translated from Ukrainian to English
+   - ALL error messages translated to English
+   - ALL documentation in English
+   - Removed all site-specific naming (voipx3, product → generic terms)
+   
+5. UPDATED DOCUMENTATION
+   - README.md - Universal usage guide
+   - QUICKSTART.txt - Quick start in English
+   - INSTALL.txt - Installation instructions
+   - All paths updated to universal-scraper/
+
+INSTALLATION:
+-------------
+Copy universal-scraper folder to your theme's includes/ directory
+
+Add to functions.php:
+require_once get_template_directory() . '/includes/universal-scraper/init.php';
+
+COMPATIBILITY:
+--------------
+- WordPress 5.0+
+- WooCommerce 3.0+
+- PHP 7.0+
+
+FEATURES:
+---------
+✅ Universal scraper for any website
+✅ Automatic category matching via keywords
+✅ Sitemap-based content extraction
+✅ WooCommerce product import
+✅ Category import
+✅ Image downloading
+✅ Meta data preservation
+✅ Debug tools for testing
+✅ Fully portable module
+

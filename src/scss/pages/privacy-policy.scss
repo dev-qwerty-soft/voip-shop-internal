@@ -1,0 +1,299 @@
+.privacy-policy-section {
+  padding: get-d(197px) 0 0;
+  overflow: hidden;
+
+  @include respond(lg) {
+    padding: get-lg(197px) 0 0;
+  }
+
+  @include respond(md) {
+    padding: 112px 0 0;
+  }
+
+  & .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: get-d(60px);
+    max-width: get-d(720px);
+    width: 100%;
+    margin: 0 auto;
+
+    @include respond(lg) {
+      gap: get-lg(60px);
+      max-width: get-lg(720px);
+    }
+
+    @include respond(md) {
+      gap: 60px;
+      max-width: 100%;
+    }
+  }
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: get-d(20px);
+    text-align: center;
+
+    @include respond(lg) {
+      gap: get-lg(20px);
+    }
+
+    @include respond(md) {
+      gap: 12px;
+    }
+
+    & .title {
+      font-weight: 700;
+      font-size: get-d(52px);
+      line-height: get-d(56px);
+      margin-bottom: 0;
+
+      @include respond(lg) {
+        font-size: get-lg(52px);
+        line-height: get-lg(56px);
+      }
+
+      @include respond(md) {
+        font-size: 32px;
+        line-height: 40px;
+      }
+    }
+
+    & .paragraph {
+      color: $color-grey-md;
+    }
+  }
+
+  &__block {
+    & .title {
+      margin-bottom: get-d(20px);
+      font-size: get-d(34px);
+      line-height: get-d(44px);
+      font-weight: 600;
+
+      @include respond(lg) {
+        margin-bottom: get-lg(20px);
+        font-size: get-lg(34px);
+        line-height: get-lg(44px);
+      }
+
+      @include respond(md) {
+        margin-bottom: 20px;
+        font-size: 26px;
+        line-height: 34px;
+      }
+    }
+
+    & .content {
+      display: flex;
+      flex-direction: column;
+      gap: get-d(12px);
+
+      @include respond(lg) {
+        gap: get-lg(12px);
+      }
+
+      @include respond(md) {
+        gap: 12px;
+      }
+    }
+
+    & ul,
+    ol {
+      display: flex;
+      flex-direction: column;
+      gap: get-d(12px);
+      padding: 0;
+
+      @include respond(lg) {
+        gap: get-lg(12px);
+      }
+
+      @include respond(md) {
+        gap: 12px;
+      }
+
+      & li {
+        display: flex;
+        flex-direction: column;
+        gap: get-d(8px);
+        font-size: get-d(16px);
+        line-height: get-d(24px);
+        padding-left: get-d(32px);
+        color: $color-grey-light;
+
+        @include respond(lg) {
+          gap: get-lg(8px);
+          font-size: get-lg(16px);
+          line-height: get-lg(24px);
+          padding-left: get-lg(32px);
+        }
+
+        @include respond(md) {
+          gap: 8px;
+          font-size: 14px;
+          line-height: 20px;
+          padding-left: 32px;
+        }
+
+        &:not(:has(strong, b)) {
+          position: relative;
+
+          &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            top: get-d(8px);
+            border-radius: 50%;
+            left: get-d(8px);
+            width: get-d(8px);
+            height: get-d(8px);
+            background-color: $color-white;
+
+            @include respond(lg) {
+              top: get-lg(8px);
+              left: get-lg(8px);
+              width: get-lg(8px);
+              height: get-lg(8px);
+            }
+
+            @include respond(md) {
+              top: 8px;
+              left: 8px;
+              width: 8px;
+              height: 8px;
+            }
+          }
+        }
+
+        &:has(strong, b) {
+          strong,
+          b {
+            font-weight: 700;
+            font-size: inherit;
+            line-height: inherit;
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              border-radius: 50%;
+              left: get-d(-24px);
+              width: get-d(8px);
+              height: get-d(8px);
+
+              @include respond(lg) {
+                left: get-lg(-24px);
+                width: get-lg(8px);
+                height: get-lg(8px);
+              }
+
+              @include respond(md) {
+                left: -24px;
+                width: 8px;
+                height: 8px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    & p {
+      font-size: get-d(16px);
+      line-height: get-d(24px);
+      color: $color-grey-light;
+
+      @include respond(lg) {
+        font-size: get-lg(16px);
+        line-height: get-lg(24px);
+      }
+
+      @include respond(md) {
+        font-size: 14px;
+        line-height: 20px;
+      }
+    }
+
+    & a {
+      margin-top: get-d(12px);
+
+      @include respond(lg) {
+        margin-top: get-lg(12px);
+      }
+
+      @include respond(md) {
+        margin-top: 12px;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    & .mail,
+    & .site,
+    & .phone {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: get-d(8px);
+      color: $color-white;
+
+      @include respond(lg) {
+        gap: get-lg(8px);
+      }
+
+      @include respond(md) {
+        gap: 8px;
+      }
+
+      &::before {
+        width: get-d(20px);
+        height: get-d(20px);
+        content: '';
+        display: block;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+
+        @include respond(lg) {
+          width: get-lg(20px);
+          height: get-lg(20px);
+        }
+
+        @include respond(md) {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    & .mail::before {
+      background-image: url('../svg/email.svg');
+    }
+
+    & .phone::before {
+      background-image: url('../svg/call.svg');
+    }
+  }
+
+  &__blocks {
+    display: flex;
+    flex-direction: column;
+    gap: get-d(80px);
+
+    @include respond(lg) {
+      gap: get-lg(80px);
+    }
+
+    @include respond(md) {
+      gap: 40px;
+    }
+  }
+}

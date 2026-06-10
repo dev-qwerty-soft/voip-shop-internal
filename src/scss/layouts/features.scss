@@ -1,0 +1,213 @@
+.features {
+    padding: get-d(50px) 0;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: get-d(20px);
+        position: relative;
+
+        @include respond(lg) {
+            gap: get-lg(20px);
+        }
+
+        @include respond(md) {
+            flex-direction: column;
+            gap: 32px;
+        }
+    }
+
+    .title {
+        margin-top: get-d(20px);
+
+        @include respond(lg) {
+            margin-top: get-lg(20px);
+        }
+
+        @include respond(md) {
+            margin-top: 20px;
+        }
+    }
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: get-d(60px);
+        max-width: get-d(437px);
+        height: fit-content;
+        width: 100%;
+        position: sticky;
+        top: get-d(80px);
+        height: calc(100vh - get-d(140px));
+
+        @include respond(lg) {
+            max-width: get-lg(437px);
+            gap: get-lg(60px);
+            top: get-lg(80px);
+            height: calc(100vh - get-lg(140px));
+        }
+
+        @include respond(md) {
+            max-width: 100%;
+            top: 0;
+            gap: 60px;
+            position: relative;
+            height: auto;
+        }
+
+        &-buttons {
+            display: flex;
+            align-items: center;
+            gap: get-d(20px);
+            margin-top: get-d(20px);
+
+            @include respond(lg) {
+                gap: get-lg(20px);
+                margin-top: get-lg(20px);
+            }
+
+            @include respond(md) {
+                gap: 12px;
+                margin-top: 12px;
+                flex-direction: column;
+            }
+
+            .btn {
+                @include respond(md) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    &__list {
+        max-width: get-d(668px);
+
+        @include respond(lg) {
+            max-width: get-lg(668px);
+        }
+
+        @include respond(md) {
+            max-width: 100%;
+        }
+    }
+
+    &__item {
+        padding: get-d(28px);
+        display: flex;
+        gap: get-d(24px);
+        background: $color-grey-dark;
+        border-radius: get-d(36px);
+        border: get-d(12px) solid $color-dark-blue-2;
+        transition: 0.3s ease;
+
+        @include respond(lg) {
+            padding: get-lg(28px);
+            gap: get-lg(24px);
+            border-radius: get-lg(36px);
+            border: get-lg(12px) solid $color-dark-blue-2;
+        }
+
+        @include respond(md) {
+            padding: 18px;
+            gap: 24px;
+            border-radius: 36px;
+            border: 10px solid $color-dark-blue-2;
+            flex-direction: column;
+        }
+
+        &:hover {
+            border-color: rgba($color-light-blue, 0.4);
+        }
+
+        &:not(:first-child) {
+            margin-top: get-d(28px);
+
+            @include respond(lg) {
+                margin-top: get-lg(28px);
+            }
+
+            @include respond(md) {
+                margin-top: 28px;
+            }
+        }
+
+        &-title {
+            margin-top: get-d(6px);
+            font-weight: 600;
+            font-size: get-d(26px);
+            line-height: get-d(36px);
+
+            @include respond(lg) {
+                margin-top: get-lg(6px);
+                font-size: get-lg(26px);
+                line-height: get-lg(36px);
+            }
+
+            @include respond(md) {
+                margin-top: 0;
+                font-size: 24px;
+                line-height: 32px;
+            }
+        }
+
+        &-text {
+            margin-top: get-d(16px);
+
+            @include respond(lg) {
+                margin-top: get-lg(16px);
+            }
+
+            @include respond(md) {
+                margin-top: 16px;
+            }
+        }
+
+        &-num {
+            flex: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: get-d(16px);
+            line-height: get-d(22px);
+            font-weight: 500;
+            border-radius: 50%;
+            width: get-d(52px);
+            height: get-d(52px);
+            background: rgba($color-white, 0.06);
+            border: 1px solid rgba($color-white, 0.14);
+
+            @include respond(lg) {
+                font-size: get-lg(16px);
+                line-height: get-lg(22px);
+                width: get-lg(52px);
+                height: get-lg(52px);
+            }
+
+            @include respond(md) {
+                font-size: 16px;
+                line-height: 22px;
+                width: 52px;
+                height: 52px;
+            }
+
+            img {
+                width: get-d(28px);
+                height: get-d(28px);
+
+                @include respond(lg) {
+                    width: get-lg(28px);
+                    height: get-lg(28px);
+                }
+
+                @include respond(md) {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+
+        }
+    }
+}

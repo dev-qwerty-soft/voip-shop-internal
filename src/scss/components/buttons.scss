@@ -1,0 +1,41 @@
+.btn,
+.single_add_to_cart_button {
+  padding: get-d(10px) get-d(20px);
+  font-weight: 700;
+  background-color: $color-main;
+  color: $color-white;
+  font-size: get-d(14px);
+  border-radius: get-d(20px);
+  line-height: get-d(20px);
+  display: inline-block;
+  transition: 0.3s ease !important;
+  text-align: center;
+
+  @include respond(lg) {
+    padding: get-lg(10px) get-lg(20px);
+    font-size: get-lg(16px);
+    border-radius: get-lg(20px);
+    line-height: get-lg(20px);
+  }
+
+  @include respond(md) {
+    border-radius: 28px;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 10px 20px;
+  }
+
+  &:hover {
+    background-color: $color-dark-blue;
+  }
+
+  &--light {
+    background-color: $color-grey-light;
+    color: $color-dark-blue;
+
+    &:hover {
+      background-color: $color-light-blue;
+      color: $color-white;
+    }
+  }
+}

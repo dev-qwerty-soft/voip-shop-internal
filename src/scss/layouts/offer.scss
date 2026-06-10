@@ -1,0 +1,98 @@
+.offer {
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .title {
+    margin-top: get-d(6px);
+    font-size: get-d(52px);
+    line-height: get-d(56px);
+    text-align: center;
+
+    @include respond(lg) {
+      margin-top: get-lg(6px);
+      font-size: get-lg(52px);
+      line-height: get-lg(56px);
+    }
+
+    @include respond(md) {
+      margin-top: 8px;
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+
+  .simple-text {
+    margin-top: get-d(8px);
+    width: 100%;
+
+    @include respond(lg) {
+      margin-top: get-lg(8px);
+    }
+
+    @include respond(md) {
+      margin-top: 8px;
+    }
+  }
+
+  .subtitle {
+    margin-top: get-d(20px);
+    font-weight: 600;
+    font-size: get-d(20px);
+    color: $color-grey-light;
+
+    @include respond(lg) {
+      margin-top: get-lg(20px);
+      font-size: get-lg(20px);
+    }
+
+    @include respond(md) {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: get-d(755px);
+    text-align: center;
+
+    @include respond(lg) {
+      max-width: get-lg(755px);
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: get-d(1940px);
+    width: get-d(1940px);
+    height: auto;
+    max-height: auto;
+
+    @include respond(lg) {
+      max-width: get-lg(1940px);
+      width: get-lg(1940px);
+    }
+
+    @include respond(md) {
+      transform: translate(-50%, -50%) rotate(-90deg);
+      max-width: 940px;
+      width: auto;
+    }
+  }
+}

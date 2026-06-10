@@ -1,0 +1,161 @@
+.schedule-modal {
+    background: $color-dark-blue-2;
+    border-radius: get-d(24px);
+    padding: get-d(40px);
+    width: 100%;
+    max-width: get-d(696px);
+    position: relative;
+    transform: translateY(28px) scale(0.96);
+    opacity: 0;
+    transition:
+        transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease;
+    text-align: center;
+
+    @include respond(lg) {
+        border-radius: get-lg(24px);
+        padding: get-lg(40px);
+        max-width: get-lg(696px);
+    }
+
+    @include respond(md) {
+        border-radius: 24px;
+        padding: 16px;
+        max-width: calc(100% - 32px);
+    }
+
+
+    &-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba($color-black, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+
+        &.schedule-modal--visible {
+            opacity: 1;
+            pointer-events: all;
+
+            .schedule-modal {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: get-d(318px);
+        position: relative;
+        overflow: hidden;
+        border-radius: get-d(24px);
+
+        @include respond(lg) {
+            border-radius: get-lg(24px);
+            height: get-lg(318px);
+        }
+
+        @include respond(md) {
+            border-radius: 12px;
+            height: 153px;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: get-d(27.5px);
+        right: get-d(27.5px);
+        cursor: pointer;
+        transition: 0.3s ease;
+
+        @include respond(lg) {
+            top: get-lg(27.5px);
+            right: get-lg(27.5px);
+        }
+
+        @include respond(md) {
+            top: 15px;
+            right: 15px;
+        }
+
+        svg {
+            width: get-d(17px);
+            height: get-d(17px);
+
+            @include respond(lg) {
+                width: get-lg(17px);
+                height: get-lg(17px);
+            }
+
+            @include respond(md) {
+                width: 17px;
+                height: 17px;
+            }
+        }
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__title {
+        margin-top: get-d(24px);
+        font-weight: 600;
+        font-size: get-d(34px);
+        line-height: get-d(44px);
+
+        @include respond(lg) {
+            margin-top: get-lg(24px);
+            font-size: get-lg(34px);
+            line-height: get-lg(44px);
+        }
+
+        @include respond(md) {
+            margin-top: 24px;
+            font-size: 24px;
+            line-height: 30px;
+        }
+    }
+
+    &__text {
+        margin-top: get-d(8px);
+
+        @include respond(lg) {
+            margin-top: get-lg(8px);
+        }
+
+        @include respond(md) {
+            margin-top: 8px;
+        }
+    }
+
+    .btn {
+        @include respond(md) {
+            width: 100%;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        gap: get-d(20px);
+        justify-content: center;
+        margin-top: get-d(24px);
+
+        @include respond(lg) {
+            gap: get-lg(20px);
+            margin-top: get-lg(24px);
+        }
+
+        @include respond(md) {
+            gap: 12px;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+    }
+}

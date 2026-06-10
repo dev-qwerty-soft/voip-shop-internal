@@ -1,0 +1,79 @@
+.text-image {
+  padding: get-d(80px) 0 get-d(70px);
+
+  @include respond(lg) {
+    padding: get-lg(80px) 0 get-lg(70px);
+  }
+
+  @include respond(md) {
+    padding: 60px 0 50px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    gap: get-d(80px);
+
+    @include respond(lg) {
+      gap: get-lg(80px);
+    }
+
+    @include respond(md) {
+      flex-direction: column;
+      gap: 60px;
+    }
+  }
+
+  .title {
+    margin-top: get-d(20px);
+    font-size: get-d(42px);
+
+    @include respond(lg) {
+      margin-top: get-lg(20px);
+      font-size: get-lg(42px);
+    }
+
+    @include respond(md) {
+      flex-direction: column;
+      margin-top: 12px;
+      font-size: 28px;
+      line-height: 36px;
+    }
+  }
+
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: get-d(60px);
+
+    @include respond(lg) {
+      gap: get-lg(60px);
+    }
+
+    @include respond(md) {
+      gap: 60px;
+    }
+  }
+
+  img {
+    height: get-d(320px);
+    width: get-d(668px);
+    object-fit: cover;
+    border-radius: get-d(24px);
+
+    @include respond(lg) {
+      height: get-lg(320px);
+      width: get-lg(668px);
+      border-radius: get-lg(24px);
+    }
+
+    @include respond(md) {
+      height: 320px;
+      width: 100%;
+      border-radius: 24px;
+      object-position: left;
+    }
+  }
+}

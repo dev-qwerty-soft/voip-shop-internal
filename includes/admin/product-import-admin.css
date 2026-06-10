@@ -1,0 +1,157 @@
+.product-import-wrap {
+  max-width: 1200px;
+}
+
+.product-import-container {
+  background: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+}
+
+.import-section {
+  margin-bottom: 30px;
+}
+
+.import-section h2 {
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.import-form {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.import-form input[type='text'] {
+  flex: 1;
+  max-width: 600px;
+}
+
+.import-progress {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f0f0f1;
+  border-radius: 4px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 30px;
+  background: #ddd;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2271b1, #135e96);
+  width: 0%;
+  transition: width 0.3s ease;
+  animation: progressAnimation 2s infinite;
+}
+
+@keyframes progressAnimation {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 70%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.progress-text {
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.import-result {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 4px;
+}
+
+.import-result h3 {
+  margin-top: 0;
+}
+
+#test-result-content {
+  background: #272822;
+  color: #f8f8f2;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+#products-list {
+  margin: 20px 0;
+}
+
+#products-list table {
+  margin-bottom: 20px;
+}
+
+#products-list img {
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+#import-products {
+  margin-top: 20px;
+}
+
+.status-success {
+  color: #46b450;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.status-error {
+  color: #dc3232;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#import-summary .notice {
+  padding: 15px;
+}
+
+#import-summary ul {
+  margin: 10px 0 0 0;
+  list-style: none;
+}
+
+#import-summary li {
+  padding: 5px 0;
+}
+
+#import-details {
+  margin-top: 20px;
+}
+
+#import-details table {
+  margin-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 782px) {
+  .import-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .import-form input[type='text'] {
+    max-width: 100%;
+  }
+}

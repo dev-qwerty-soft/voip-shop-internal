@@ -1,0 +1,278 @@
+.reviews {
+    padding: get-d(50px) 0;
+
+    @include respond(lg) {
+        padding: get-lg(50px) 0;
+    }
+
+    @include respond(md) {
+        padding: 50px 16px;
+    }
+
+    .container {
+        border-radius: get-d(56px);
+        border: get-d(18px) solid $color-dark-blue-2;
+        background: $color-grey-dark;
+        padding: get-d(52px);
+
+        display: flex;
+        justify-content: space-between;
+        gap: get-d(50px);
+
+        overflow: hidden;
+
+        @include respond(lg) {
+            border-radius: get-lg(56px);
+            gap: get-lg(50px);
+            border: get-lg(18px) solid $color-dark-blue-2;
+        }
+
+        @include respond(md) {
+            border-radius: 32px;
+            gap: 26px;
+            flex-direction: column;
+            border: 12px solid $color-dark-blue-2;
+        }
+    }
+
+    .title {
+        margin-top: get-d(20px);
+
+        @include respond(lg) {
+            margin-top: get-lg(20px);
+        }
+
+        @include respond(md) {
+            margin-top: 20px;
+        }
+    }
+
+
+    &__inner {
+        width: 100%;
+        max-width: get-d(636px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: get-d(24px);
+
+        @include respond(lg) {
+            max-width: get-lg(636px);
+        }
+
+        @include respond(md) {
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        &-top {
+            @include respond(md) {
+                text-align: center;
+            }
+        }
+
+        &-nav {
+            display: flex;
+            align-items: center;
+            gap: get-d(40px);
+
+            @include respond(lg) {
+                gap: get-lg(40px);
+            }
+
+            @include respond(md) {
+                display: none;
+            }
+        }
+    }
+
+    &__arrow {
+        width: get-d(44px);
+        height: get-d(44px);
+        background-color: rgba($color-white, 0.06);
+        border: solid 1px rgba($color-white, 0.14);
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include respond(lg) {
+            width: get-lg(44px);
+            height: get-lg(44px);
+        }
+
+        @include respond(md) {
+            width: 44px;
+            height: 44px;
+        }
+
+        &:hover {
+            path {
+                stroke: $color-light-blue;
+            }
+        }
+
+        svg {
+            width: get-d(37px);
+            height: get-d(37px);
+
+            @include respond(lg) {
+                width: get-lg(37px);
+                height: get-lg(37px);
+            }
+
+            @include respond(md) {
+                width: 37px;
+                height: 37px;
+            }
+        }
+    }
+
+    &__slider {
+        height: get-d(560px);
+        overflow: visible;
+        max-width: get-d(594px);
+        width: 100%;
+        padding: get-d(40px) 0 get-d(34px);
+
+        @include respond(lg) {
+            height: get-lg(560px);
+            max-width: get-lg(594px);
+            padding: get-lg(40px) 0 get-lg(34px);
+        }
+
+        @include respond(md) {
+            height: auto;
+            max-width: 100%;
+            padding: 0 16px;
+        }
+    }
+
+    &__slide {
+        @include respond(md) {
+            height: auto;
+        }
+
+        &-inner {
+            height: 100%;
+            transition: 0.3s ease;
+            transform: scale(0.85);
+            padding: get-d(40px);
+            background-color: $color-black;
+            border-radius: get-d(40px);
+
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            @include respond(lg) {
+                padding: get-lg(40px);
+                border-radius: get-lg(40px);
+            }
+
+            @include respond(md) {
+                padding: 16px;
+                border-radius: 24px;
+            }
+        }
+
+        &.swiper-slide-active {
+            .reviews__slide-inner {
+                transform: scale(1);
+            }
+        }
+
+        &-text {
+            svg {
+                width: get-d(24px);
+                margin-bottom: get-d(36px);
+                height: auto;
+
+                @include respond(lg) {
+                    width: get-lg(24px);
+                    margin-bottom: get-lg(36px);
+                }
+
+                @include respond(md) {
+                    width: 24px;
+                    margin-bottom: 20px;
+                }
+            }
+
+            p {
+                &:not(:first-child) {
+                    margin-top: get-d(12px);
+
+                    @include respond(lg) {
+                        margin-top: get-lg(12px);
+                    }
+
+                    @include respond(md) {
+                        margin-top: 12px;
+                    }
+                }
+            }
+        }
+
+        &-name {
+            font-weight: 700;
+        }
+
+        &-bottom {
+            display: flex;
+            align-items: center;
+            gap: get-d(12px);
+
+            @include respond(lg) {
+                gap: get-lg(12px);
+            }
+
+            @include respond(md) {
+                margin-top: 20px;
+            }
+        }
+
+        &-logo {
+            padding: get-d(2px);
+            border-radius: 50%;
+            border: solid 1px $color-light-blue;
+            flex: none;
+            width: get-d(36px);
+            height: get-d(36px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            @include respond(lg) {
+                width: get-lg(36px);
+                height: get-lg(36px);
+                padding: get-lg(2px);
+            }
+
+            @include respond(md) {
+                width: 36px;
+                height: 36px;
+                padding: 2px;
+            }
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    &__mobile {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        margin-top: 26px;
+
+        @include respond(md) {
+            display: flex;
+            gap: 32px;
+        }
+    }
+}

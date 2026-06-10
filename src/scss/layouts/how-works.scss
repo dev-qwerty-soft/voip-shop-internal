@@ -1,0 +1,233 @@
+.how-works {
+  padding-top: get-d(80px);
+  padding-bottom: get-d(80px);
+
+  @include respond(lg) {
+    padding-top: get-lg(80px);
+    padding-bottom: get-lg(80px);
+  }
+
+  @include respond(md) {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    gap: get-d(60px);
+
+    @include respond(lg) {
+      gap: get-lg(60px);
+    }
+
+    @include respond(md) {
+      gap: 32px;
+      flex-direction: column;
+    }
+  }
+
+  .title {
+    margin-top: get-d(20px);
+    font-size: get-d(42px);
+
+    @include respond(lg) {
+      margin-top: get-lg(20px);
+      font-size: get-lg(42px);
+    }
+
+    @include respond(md) {
+      margin-top: 12px;
+      font-size: 26px;
+    }
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-text {
+      max-width: get-d(306px);
+
+      @include respond(lg) {
+        max-width: get-lg(306px);
+      }
+
+      @include respond(md) {
+        max-width: 100%;
+        margin-top: 60px;
+      }
+    }
+
+    .btn {
+      @include respond(sm) {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+
+  &__card {
+    max-width: get-d(390px);
+    height: get-d(560px);
+    width: 100%;
+    border-radius: get-d(24px);
+    background: radial-gradient(116.65% 116.65% at 51.11% 1.13%, #040813 0%, #01033e 45.31%, #01033e 62.98%, #0020b2 82.21%, #03f 89.9%, #807dfe 100%);
+    height: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    flex: none;
+
+    @include respond(lg) {
+      max-width: get-lg(390px);
+      border-radius: get-lg(24px);
+      height: get-lg(560px);
+    }
+
+    @include respond(md) {
+      max-width: 100%;
+      border-radius: 20px;
+      height: 400px;
+      width: 100%;
+    }
+
+    &-text {
+      color: $color-grey-light;
+      line-height: get-d(24px);
+      @include respond(md) {
+        display: none;
+      }
+    }
+
+    &-img {
+      width: 100%;
+      height: 100%;
+      & img, & picture {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  &__text {
+    color: $color-grey-md;
+  }
+
+  .btn {
+    margin-top: get-d(40px);
+
+    @include respond(lg) {
+      margin-top: get-lg(40px);
+    }
+
+    @include respond(lg) {
+      margin-top: 12px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    flex: auto;
+    gap: get-d(60px);
+
+    @include respond(lg) {
+      gap: get-lg(60px);
+    }
+
+    @include respond(md) {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  &__list {
+    max-width: get-d(544px);
+    width: 100%;
+    flex: none;
+
+    @include respond(lg) {
+      max-width: get-lg(544px);
+    }
+
+    @include respond(md) {
+      max-width: 100%;
+    }
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      gap: get-d(24px);
+    }
+
+    &-item {
+      &:not(:first-child) {
+        margin-top: get-d(40px);
+
+        @include respond(lg) {
+          margin-top: get-lg(40px);
+        }
+
+        @include respond(md) {
+          margin-top: 24px;
+        }
+      }
+    }
+
+    &-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: get-d(46px);
+      height: get-d(46px);
+      border-radius: 50%;
+      background-color: rgba($color-white, 0.06);
+      border: solid 1px rgba($color-white, 0.14);
+      flex: none;
+      color: $color-grey-md;
+
+      @include respond(lg) {
+        width: get-lg(46px);
+        height: get-lg(46px);
+      }
+
+      @include respond(md) {
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    &-title {
+      font-size: get-d(26px);
+      font-weight: 600;
+
+      @include respond(lg) {
+        font-size: get-lg(26px);
+      }
+
+      @include respond(md) {
+        font-size: 24px;
+      }
+    }
+
+    &-text {
+      margin-top: get-d(16px);
+      color: $color-grey-md;
+      font-weight: 500;
+      padding-left: get-d(70px);
+
+      @include respond(lg) {
+        padding-left: get-lg(70px);
+        margin-top: get-lg(16px);
+      }
+
+      @include respond(md) {
+        padding-left: 0px;
+        margin-top: 16px;
+      }
+    }
+  }
+}

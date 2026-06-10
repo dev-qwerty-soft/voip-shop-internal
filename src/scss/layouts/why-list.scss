@@ -1,0 +1,286 @@
+.why-list {
+    padding: get-d(50px) 0;
+    height: 500vh;
+
+    @include respond(lg) {
+        padding: get-lg(50px) 0;
+    }
+
+    @include respond(md) {
+        padding: 50px 0;
+        height: auto;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: get-d(24px);
+
+        height: get-d(550px);
+        overflow: hidden;
+
+        @include respond(lg) {
+            gap: get-lg(24px);
+            top: get-lg(80px);
+            height: get-lg(550px);
+        }
+
+        @include respond(md) {
+            grid-template-columns: 1fr;
+            position: static;
+            height: auto;
+            gap: 32px;
+        }
+    }
+
+    &__sticky {
+        overflow: hidden;
+        position: sticky;
+        top: get-d(60px);
+        height: calc(100vh - get-d(60px));
+        display: flex;
+        align-items: center;
+
+        @include respond(lg) {
+            top: get-lg(60px);
+            height: calc(100vh - get-lg(60px));
+        }
+
+        @include respond(md) {
+            display: block;
+            position: static;
+            height: auto;
+        }
+    }
+
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        height: get-d(550px);
+
+        @include respond(lg) {
+            height: get-lg(550px);
+        }
+
+        @include respond(md) {
+            height: auto;
+        }
+
+        &-buttons {
+            display: flex;
+            align-items: center;
+            gap: get-d(20px);
+
+            @include respond(lg) {
+                gap: get-lg(20px);
+            }
+
+            @include respond(md) {
+                gap: 12px;
+                margin-top: 60px;
+                flex-direction: column;
+            }
+
+            .btn {
+                @include respond(md) {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .title {
+        margin-top: get-d(20px);
+
+        @include respond(lg) {
+            margin-top: get-lg(20px);
+        }
+
+        @include respond(md) {
+            margin-top: 12px;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: get-d(24px);
+
+        @include respond(lg) {
+            gap: get-lg(24px);
+        }
+
+        @include respond(md) {
+            gap: 32px;
+        }
+    }
+
+    &__item {
+        transition: 0.3s ease;
+        position: relative;
+
+        @include respond(lg) {
+            margin-bottom: 0 !important;
+        }
+
+        &.active {
+
+            .why-list__item-title {
+                color: $color-white;
+            }
+
+            .why-list__item-arrow {
+                transform: rotate(-90deg);
+
+                svg {
+                    path {
+                        stroke: $color-light-blue;
+                    }
+                }
+            }
+
+            .why-list__item-body {
+                opacity: 1;
+                max-height: get-d(200px);
+                padding-top: get-d(24px);
+
+                @include respond(lg) {
+                    padding-top: get-lg(24px);
+                }
+
+                @include respond(md) {
+                    padding-top: 12px;
+                }
+            }
+        }
+
+        &-head {
+            display: flex;
+            align-items: center;
+            gap: get-d(16px);
+
+            @include respond(lg) {
+                gap: get-lg(16px);
+            }
+
+            @include respond(md) {
+                gap: 16px;
+            }
+        }
+
+        &-body {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            opacity: 0;
+            overflow: hidden;
+            max-height: 0;
+            padding-top: 0;
+            transition:
+                max-height .45s cubic-bezier(.4, 0, .2, 1) .3s,
+                opacity .35s ease .3s,
+                padding .35s ease .3s;
+
+            @include respond(md) {
+                position: static;
+                opacity: 1;
+                max-height: fit-content;
+                transition: none;
+            }
+        }
+
+        &-image {
+            display: none;
+            margin-bottom: 20px;
+            border-radius: 24px;
+            height: 400px;
+            border: solid 5px $color-dark-blue-2;
+            overflow: hidden;
+
+            @include respond(md) {
+                display: block;
+            }
+        }
+
+        &-arrow {
+            transition: 0.3s ease;
+
+            svg {
+                width: get-d(36px);
+                height: get-d(36px);
+
+                @include respond(lg) {
+                    width: get-lg(36px);
+                    height: get-lg(36px);
+                }
+
+                @include respond(md) {
+                    display: none;
+                }
+
+                path {
+                    transition: 0.3s ease;
+                }
+            }
+        }
+
+        &-title {
+            font-weight: 600;
+            font-size: get-d(26px);
+            line-height: get-d(34px);
+            color: $color-grey-md;
+            transition: 0.3s ease;
+
+            @include respond(lg) {
+                font-size: get-lg(26px);
+                line-height: get-lg(34px);
+            }
+
+            @include respond(md) {
+                font-size: 24px;
+                line-height: 30px;
+                color: $color-white;
+            }
+        }
+    }
+
+    &__images {
+        height: get-d(550px);
+        overflow: hidden;
+        position: relative;
+        border-radius: get-d(24px);
+
+        @include respond(lg) {
+            height: get-lg(550px);
+            border-radius: get-lg(24px);
+        }
+
+        @include respond(md) {
+            display: none;
+        }
+
+        .img-slide {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity .65s cubic-bezier(.4, 0, .2, 1), transform .65s cubic-bezier(.4, 0, .2, 1);
+            will-change: opacity, transform;
+
+            @include respond(md) {
+                border-radius: get-lg(24px);
+            }
+
+            &.active {
+                opacity: 1;
+                transform: scale(1);
+                z-index: 2;
+            }
+        }
+    }
+}

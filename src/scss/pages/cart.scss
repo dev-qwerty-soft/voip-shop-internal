@@ -1,0 +1,785 @@
+.custom-cart {
+  padding: 0 0 get-d(100px);
+
+  @include respond(lg) {
+    padding: 0 0 get-lg(100px);
+  }
+
+  @include respond(md) {
+    padding: 0 0 100px;
+  }
+
+  &__title {
+    color: #fff;
+    font-size: get-d(34px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 get-d(20px) 0;
+
+    @include respond(lg) {
+      font-size: get-lg(34px);
+      margin: 0 0 get-lg(20px) 0;
+    }
+
+    @include respond(md) {
+      font-size: 26px;
+      margin: 0 0 24px 0;
+    }
+  }
+
+  &__content {
+    display: flex;
+    gap: get-d(32px);
+
+    @include respond(lg) {
+      gap: get-lg(32px);
+    }
+
+    @include respond(md) {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  &__items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: get-d(16px);
+
+    @include respond(lg) {
+      gap: get-lg(16px);
+    }
+
+    @include respond(md) {
+      gap: 16px;
+    }
+  }
+
+  &__item {
+    border-radius: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: get-d(36px);
+    padding: get-d(20px);
+    display: flex;
+    gap: get-d(16px);
+
+    @include respond(lg) {
+      border-radius: get-lg(36px);
+      padding: get-lg(20px);
+      gap: get-lg(16px);
+    }
+
+    @include respond(md) {
+      border-radius: 36px;
+      padding: 16px;
+    }
+
+    // Desktop version - hide on mobile
+    &--desktop {
+      @include respond(md) {
+        display: none;
+      }
+    }
+
+    // Mobile version - hide on desktop
+    &--mobile {
+      display: none;
+
+      @include respond(md) {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  }
+
+  &__item-image {
+    width: get-d(84px);
+    height: get-d(84px);
+    flex-shrink: 0;
+    border-radius: get-d(16px);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+
+    @include respond(lg) {
+      width: get-lg(84px);
+      height: get-lg(84px);
+      border-radius: get-lg(16px);
+    }
+
+    @include respond(md) {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__item-details {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: get-d(16px);
+
+    @include respond(lg) {
+      gap: get-lg(16px);
+    }
+
+    @include respond(md) {
+      gap: 16px;
+    }
+  }
+
+  &__item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item-name {
+    color: #fff;
+    font-size: get-d(20px);
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    @include respond(lg) {
+      font-size: get-lg(20px);
+    }
+
+    @include respond(md) {
+      font-size: 20px;
+    }
+
+    &:hover {
+      color: #3d54ff;
+    }
+  }
+
+  .variation {
+    margin: get-d(8px) 0;
+
+    @include respond(lg) {
+      margin: get-lg(8px) 0;
+    }
+
+    @include respond(md) {
+      margin: 8px 0;
+    }
+
+    dt {
+      color: #fff;
+      font-size: get-d(14px);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: get-d(4px);
+
+      @include respond(lg) {
+        font-size: get-lg(14px);
+        margin-bottom: get-lg(4px);
+      }
+
+      @include respond(md) {
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+    }
+    div {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: get-d(14px);
+      line-height: 1.4;
+      margin-bottom: get-d(8px);
+
+      @include respond(lg) {
+        font-size: get-lg(14px);
+        margin-bottom: get-lg(8px);
+      }
+
+      @include respond(md) {
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      .addon-value {
+        font-weight: 400;
+      }
+
+      .addon-price {
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__item-price {
+    color: #fff;
+    font-size: get-d(20px);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: auto;
+
+    @include respond(lg) {
+      font-size: get-lg(20px);
+    }
+
+    @include respond(md) {
+      font-size: 20px;
+    }
+  }
+  &__item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: get-d(12px);
+
+    @include respond(lg) {
+      gap: get-lg(12px);
+    }
+
+    @include respond(md) {
+      gap: 12px;
+    }
+  }
+
+  &__item-remove {
+    width: get-d(20px);
+    height: get-d(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    transition: color 0.3s ease;
+
+    @include respond(lg) {
+      width: get-lg(20px);
+      height: get-lg(20px);
+    }
+
+    @include respond(md) {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      color: #ff4444;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__item-quantity {
+    margin-top: auto;
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: get-d(8px);
+      @include respond(lg) {
+        gap: get-lg(8px);
+      }
+
+      @include respond(md) {
+        gap: 8px;
+      }
+    }
+
+    .quantity-btn {
+      width: get-d(36px);
+      height: get-d(36px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: none rgba(255, 255, 255, 0.06);
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      @include respond(lg) {
+        width: get-lg(36px);
+        height: get-lg(36px);
+      }
+
+      @include respond(md) {
+        width: 36px;
+        height: 36px;
+      }
+      svg {
+        width: get-d(16px);
+        height: get-d(16px);
+        @include respond(lg) {
+          width: get-lg(16px);
+          height: get-lg(16px);
+        }
+        @include respond(md) {
+          width: 16px;
+          height: 16px;
+        }
+      }
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    .qty {
+      width: get-d(36px);
+      max-width: get-d(36px);
+      height: get-d(36px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: none rgba(255, 255, 255, 0.06);
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      @include respond(lg) {
+        width: get-lg(36px);
+        max-width: get-lg(36px);
+        height: get-lg(36px);
+      }
+
+      @include respond(md) {
+        width: 36px;
+        max-width: 36px;
+        height: 36px;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      // Hide spinner arrows
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      -moz-appearance: textfield;
+    }
+  }
+
+  &__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+
+    .custom-cart__item-name {
+      flex: 1;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      text-decoration: none;
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #3d54ff;
+        }
+      }
+
+      .variation {
+        margin: 6px 0 0 0;
+
+        dt {
+          color: #fff;
+          font-size: 12px;
+          font-weight: 500;
+          margin-bottom: 2px;
+        }
+
+        div {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 12px;
+          line-height: 1.4;
+          margin-bottom: 4px;
+        }
+      }
+    }
+
+    .custom-cart__item-remove {
+      flex-shrink: 0;
+    }
+  }
+
+  &__item-content {
+    display: flex;
+    align-items: center;
+    align-items: flex-end;
+    gap: 12px;
+
+    .custom-cart__item-image {
+      flex-shrink: 0;
+    }
+
+    .custom-cart__item-quantity {
+      flex: 1;
+      margin-top: 0;
+    }
+
+    .custom-cart__item-price {
+      flex-shrink: 0;
+      margin-top: 0;
+      font-size: 18px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+  }
+
+  &__sidebar {
+    width: get-d(400px);
+    flex-shrink: 0;
+
+    @include respond(lg) {
+      width: get-lg(400px);
+    }
+
+    @include respond(md) {
+      width: 100%;
+    }
+  }
+
+  &__totals {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: local rgba(255, 255, 255, 0.06);
+    border-radius: get-d(36px);
+    padding: get-d(20px);
+
+    @include respond(lg) {
+      border-radius: get-lg(36px);
+      padding: get-lg(20px);
+    }
+
+    @include respond(md) {
+      border-radius: 36px;
+      padding: 16px;
+    }
+  }
+
+  &__totals-title {
+    color: #fff;
+    font-size: get-d(26px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 get-d(12px) 0;
+
+    @include respond(lg) {
+      font-size: get-lg(26px);
+      margin: 0 0 get-lg(12px) 0;
+    }
+
+    @include respond(md) {
+      font-size: 24px;
+      margin: 0 0 12px 0;
+    }
+  }
+
+  &__shipping {
+    display: flex;
+    flex-direction: column;
+    gap: get-d(6px);
+    background: rgba(44, 255, 86, 0.06);
+    border-radius: get-d(16px);
+    padding: get-d(16px);
+    margin-bottom: get-d(12px);
+
+    @include respond(lg) {
+      gap: get-lg(6px);
+      border-radius: get-lg(16px);
+      padding: get-lg(16px);
+      margin-bottom: get-lg(12px);
+    }
+
+    @include respond(md) {
+      gap: 6px;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+  }
+
+  &__shipping-icon {
+    width: get-d(20px);
+    height: get-d(20px);
+    flex-shrink: 0;
+
+    @include respond(lg) {
+      width: get-lg(20px);
+      height: get-lg(20px);
+    }
+
+    @include respond(md) {
+      width: 20px;
+      height: 20px;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__shipping-text {
+    color: #2cff56;
+    font-size: get-d(16px);
+    font-weight: 500;
+    line-height: 1.5;
+
+    @include respond(lg) {
+      font-size: get-lg(16px);
+    }
+
+    @include respond(md) {
+      font-size: 14px;
+    }
+  }
+
+  &__totals-table {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: get-d(100px);
+    padding: get-d(10px) get-d(16px);
+    margin-bottom: get-d(24px);
+
+    @include respond(lg) {
+      border-radius: get-lg(100px);
+      padding: get-lg(10px) get-lg(16px);
+      margin-bottom: get-lg(24px);
+    }
+
+    @include respond(md) {
+      border-radius: 100px;
+      padding: 10px 16px;
+      margin-bottom: 24px;
+    }
+  }
+
+  &__totals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__totals-label {
+    color: #fff;
+    font-size: get-d(16px);
+    font-weight: 500;
+    line-height: 1.5;
+
+    @include respond(lg) {
+      font-size: get-lg(16px);
+    }
+
+    @include respond(md) {
+      font-size: 14px;
+    }
+  }
+
+  &__totals-value {
+    color: #fff;
+    font-size: get-d(16px);
+    font-weight: 500;
+    line-height: 1.4;
+
+    @include respond(lg) {
+      font-size: get-lg(16px);
+    }
+
+    @include respond(md) {
+      font-size: 14px;
+    }
+  }
+
+  &__actions {
+    .checkout-button {
+      width: 100% !important;
+      padding: get-d(10px) get-d(20px) !important;
+      font-weight: 700 !important;
+      background-color: $color-main !important;
+      color: $color-white !important;
+      font-size: get-d(14px) !important;
+      border-radius: get-d(20px) !important;
+      line-height: get-d(20px) !important;
+      display: inline-block !important;
+      transition: 0.3s ease !important;
+      text-align: center !important;
+
+      @include respond(lg) {
+        padding: get-lg(10px) get-lg(20px) !important;
+        font-size: get-lg(16px) !important;
+        border-radius: get-lg(20px) !important;
+        line-height: get-lg(20px) !important;
+      }
+
+      @include respond(md) {
+        border-radius: 28px !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+        padding: 10px 20px !important;
+      }
+
+      &:hover {
+        background-color: $color-dark-blue !important;
+      }
+    }
+  }
+
+  &__update-button {
+    display: none;
+  }
+
+  &__coupon {
+    display: none;
+  }
+
+  // Empty cart state
+  &--empty {
+    .custom-cart__title {
+      margin-bottom: 0;
+    }
+  }
+
+  &__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: get-d(20px) 0 get-d(100px) 0;
+
+    @include respond(lg) {
+      padding: get-lg(20px) 0 get-lg(100px) 0;
+    }
+
+    @include respond(md) {
+      padding: 24px 0 100px 0;
+    }
+  }
+
+  &__empty-icon {
+    width: get-d(70px);
+    height: get-d(70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 42.353px;
+    border: 1.059px solid var(--ui-black-white-14, rgba(255, 255, 255, 0.14));
+    background: var(--ui-black-white-6, rgba(255, 255, 255, 0.06));
+    border-radius: 50%;
+    margin-bottom: get-d(20px);
+
+    @include respond(lg) {
+      width: get-lg(70px);
+      height: get-lg(70px);
+      margin-bottom: get-lg(20px);
+    }
+
+    @include respond(md) {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 20px;
+    }
+
+    svg {
+      width: get-d(38px);
+      height: get-d(38px);
+
+      @include respond(lg) {
+        width: get-lg(38px);
+        height: get-lg(38px);
+      }
+
+      @include respond(md) {
+        width: 38px;
+        height: 38px;
+      }
+    }
+  }
+
+  &__empty-title {
+    color: #fff;
+    font-size: get-d(26px);
+    font-weight: 600;
+    line-height: 1.3;
+    margin: 0 0 get-d(12px) 0;
+
+    @include respond(lg) {
+      font-size: get-lg(26px);
+      margin: 0 0 get-lg(12px) 0;
+    }
+
+    @include respond(md) {
+      font-size: 24px;
+      margin: 0 0 12px 0;
+    }
+  }
+
+  &__empty-text {
+    color: $color-grey-md;
+    font-size: get-d(16px);
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 0 0 get-d(40px) 0;
+
+    @include respond(lg) {
+      font-size: get-lg(16px);
+      margin: 0 0 get-lg(40px) 0;
+    }
+
+    @include respond(md) {
+      font-size: 16px;
+      margin: 0 0 40px 0;
+    }
+  }
+
+  &__empty-button {
+    padding: get-d(10px) get-d(20px);
+    font-weight: 700;
+    background-color: $color-main;
+    color: $color-white;
+    font-size: get-d(14px);
+    border-radius: get-d(20px);
+    line-height: get-d(20px);
+    display: inline-block;
+    transition: 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+
+    @include respond(lg) {
+      padding: get-lg(10px) get-lg(20px);
+      font-size: get-lg(16px);
+      border-radius: get-lg(20px);
+      line-height: get-lg(20px);
+    }
+
+    @include respond(md) {
+      border-radius: 28px;
+      font-size: 16px;
+      line-height: 20px;
+      padding: 10px 20px;
+    }
+
+    &:hover {
+      background-color: $color-dark-blue;
+    }
+  }
+}

@@ -1,0 +1,194 @@
+.why-we {
+    padding: get-d(100px) 0 get-d(50px);
+
+    @include respond(lg) {
+        padding: get-lg(100px) 0 get-lg(50px);
+    }
+
+    @include respond(md) {
+        padding: 50px 0;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .simple-text {
+        text-align: center;
+        margin: get-d(20px) auto 0;
+        max-width: get-d(880px);
+
+        @include respond(lg) {
+            max-width: get-lg(880px);
+            margin-top: get-lg(20px);
+        }
+
+        @include respond(md) {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin-top: get-d(60px);
+        gap: get-d(24px);
+
+        @include respond(lg) {
+            margin-top: get-lg(60px);
+            gap: get-lg(24px);
+        }
+
+        @include respond(md) {
+            grid-template-columns: 1fr;
+            margin-top: 40px;
+            gap: 24px;
+        }
+    }
+
+    &__item {
+        padding: get-d(24px);
+        border-radius: get-d(24px);
+        border: 1px solid rgba($color-light-blue, 0.2);
+        background-color: rgba($color-dark-blue, 0.2);
+        position: relative;
+        height: fit-content;
+
+        &.hidden {
+            display: none;
+        }
+
+        @include respond(lg) {
+            padding: get-lg(24px);
+            border-radius: get-lg(24px);
+        }
+
+        @include respond(md) {
+            padding: 24px;
+            border-radius: 24px;
+        }
+
+        img {
+            height: get-d(194px);
+            border-radius: get-d(16px);
+
+            @include respond(lg) {
+                height: get-lg(194px);
+                border-radius: get-lg(16px);
+            }
+
+            @include respond(md) {
+                height: 194px;
+                border-radius: 16px;
+            }
+        }
+
+        &-text {
+            margin-top: get-d(16px);
+            font-weight: 500;
+            font-size: get-d(14px);
+            line-height: get-d(20px);
+            color: $color-grey-md;
+
+            @include respond(lg) {
+                margin-top: get-lg(16px);
+                font-size: get-lg(14px);
+                line-height: get-lg(20px);
+            }
+
+            @include respond(md) {
+                margin-top: 16px;
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+        }
+
+        &-title {
+            margin-top: get-d(24px);
+            font-weight: 600;
+            font-size: get-d(20px);
+            line-height: get-d(24px);
+
+            @include respond(lg) {
+                margin-top: get-lg(24px);
+                font-size: get-lg(20px);
+                line-height: get-lg(24px);
+            }
+
+            @include respond(md) {
+                margin-top: 24px;
+                font-size: 20px;
+                line-height: 24px;
+            }
+        }
+
+        &-more {
+            display: flex;
+            align-items: center;
+            gap: get-d(4px);
+            position: absolute;
+            right: get-d(24px);
+            bottom: get-d(24px);
+            font-size: get-d(14px);
+            line-height: get-d(20px);
+            font-weight: 500;
+            cursor: pointer;
+
+            @include respond(lg) {
+                right: get-lg(24px);
+                font-size: get-lg(14px);
+                line-height: get-lg(20px);
+                bottom: get-lg(24px);
+            }
+
+            @include respond(md) {
+                right: 24px;
+                bottom: 24px;
+                line-height: 20px;
+                font-size: 14px;
+            }
+
+            svg {
+                width: get-d(14px);
+                height: get-d(14px);
+
+                @include respond(lg) {
+                    width: get-lg(14px);
+                    height: get-lg(14px);
+                }
+
+                @include respond(md) {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+    }
+
+    &__more {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        width: 100%;
+        margin-top: 16px;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            transition: 0.3s ease;
+        }
+
+        &.opened {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+
+        @include respond(md) {
+            display: flex;
+        }
+    }
+}

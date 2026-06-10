@@ -1,0 +1,51 @@
+@import '../../scss/general/mixins.scss';
+
+body {
+  background: #040813;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  @include responsive-bg('./Text-section-min');
+  & #nav {
+    background: #fff;
+    padding: 12px 24px !important;
+    border-top: 1px solid #c3c4c7;
+    border-left: 1px solid #c3c4c7;
+    border-right: 1px solid #c3c4c7;
+    margin: 0;
+  }
+  & #backtoblog {
+    background: #fff;
+    padding: 12px 24px !important;
+    border-bottom: 1px solid #c3c4c7;
+    border-left: 1px solid #c3c4c7;
+    border-right: 1px solid #c3c4c7;
+    margin: 0;
+  }
+  .forgetmenot {
+    transform: translateY(7px);
+  }
+  .privacy-policy-link {
+    color: $color-grey-light;
+  }
+}
+
+#login {
+  & #wp-submit {
+    font-weight: 400;
+    color: $color-white;
+    background: $color-dark-blue;
+    text-align: center;
+    border: none !important;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px 24px;
+    border-radius: 4px;
+  }
+  & #login-message {
+    border-color: rgba($color-dark-blue, 30%);
+  }
+  & .wp-login-logo a {
+    @include responsive-bg('./Union');
+  }
+}

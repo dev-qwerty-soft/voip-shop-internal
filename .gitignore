@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.log
+*.DS_Store
+.env
+.github/copilot-instructions.md
+dist
+dist/**/*
+build
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc

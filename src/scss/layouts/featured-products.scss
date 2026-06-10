@@ -1,0 +1,43 @@
+.featured-products {
+  padding: get-d(50px) 0;
+
+  @include respond(lg) {
+    padding: get-lg(50px) 0;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: get-d(20px);
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: get-d(42px);
+    line-height: get-d(54px);
+
+    @include respond(lg) {
+      font-size: get-lg(42px);
+      line-height: get-lg(54px);
+    }
+
+    @include respond(md) {
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 600;
+    }
+  }
+
+  &__slider {
+    margin-top: get-d(42px);
+
+    @include respond(lg) {
+      margin-top: get-lg(42px);
+    }
+
+    @include respond(md) {
+      margin-top: 24px;
+    }
+  }
+}

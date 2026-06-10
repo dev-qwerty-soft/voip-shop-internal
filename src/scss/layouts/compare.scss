@@ -1,0 +1,510 @@
+.compare {
+    padding: get-d(50px) 0 get-d(100px);
+
+    @include respond(lg) {
+        padding: get-lg(50px) 0 get-lg(100px);
+    }
+
+    @include respond(md) {
+        padding: 40px 0 50px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+
+        @include respond(lg) {
+            flex-direction: column-reverse;
+            gap: 80px;
+        }
+    }
+
+    &__reviews {
+        padding: get-d(40px);
+        max-width: get-d(594px);
+        border: 1px solid rgba($color-light-blue, 0.2);
+        border-radius: get-d(24px);
+        width: 100%;
+
+
+        @include respond(lg) {
+            padding: get-lg(40px);
+            max-width: 100%;
+            border-radius: get-lg(24px);
+        }
+
+        @include respond(md) {
+            padding: 30px 24px;
+            border-radius: 20px;
+        }
+
+        &-label {
+            font-size: get-d(14px);
+            font-weight: 600;
+            line-height: get-d(20px);
+            color: $color-main-orange;
+
+            @include respond(lg) {
+                font-size: get-lg(14px);
+                line-height: get-lg(20px);
+            }
+
+            @include respond(md) {
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+
+        &-text {
+            margin-top: get-d(6px);
+            font-size: get-d(16px);
+            font-weight: 700;
+            line-height: get-d(24px);
+            color: $color-grey-light;
+            max-width: get-d(350px);
+
+            @include respond(lg) {
+                font-size: get-lg(16px);
+                line-height: get-lg(24px);
+                margin-top: get-lg(6px);
+                max-width: get-lg(350px);
+            }
+
+            @include respond(md) {
+                font-size: 16px;
+                line-height: 24px;
+                margin-top: 6px;
+                max-width: 100%;
+            }
+        }
+
+        &-item {
+            color: $color-grey-light;
+            font-size: get-d(16px);
+            font-weight: 500;
+            line-height: get-d(24px);
+
+            @include respond(lg) {
+                font-size: get-lg(16px);
+                line-height: get-lg(24px);
+            }
+
+            @include respond(md) {
+                font-size: 16px;
+                line-height: 24px;
+            }
+
+            svg {
+                width: get-d(24px);
+                margin-bottom: get-d(16px);
+                flex: none;
+                max-width: fit-content;
+                margin-top: get-d(50px);
+
+                @include respond(lg) {
+                    width: get-lg(24px);
+                    margin-bottom: get-lg(16px);
+                    margin-top: get-lg(50px);
+                }
+
+                @include respond(md) {
+                    width: 24px;
+                    margin-bottom: 16px;
+                    margin-top: 50px;
+                }
+            }
+        }
+
+        &-arrows {
+            display: flex;
+            align-items: center;
+            gap: get-d(18px);
+            margin-top: get-d(46px);
+
+            @include respond(lg) {
+                gap: get-lg(18px);
+                margin-top: get-lg(46px);
+            }
+
+            @include respond(md) {
+                gap: 18px;
+                margin-top: 46px;
+            }
+        }
+
+        &-arrow {
+            border-radius: 50%;
+            border: 1px solid rgba($color-white, 0.14);
+            background: rgba($color-white, 0.06);
+            width: get-d(38px);
+            height: get-d(38px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+            user-select: none;
+
+            @include respond(lg) {
+                width: get-lg(38px);
+                height: get-lg(38px);
+            }
+
+            @include respond(md) {
+                width: 38px;
+                height: 38px;
+            }
+
+            &:hover {
+                background: $color-light-blue;
+
+                path {
+                    stroke: $color-black;
+                }
+            }
+
+            &.swiper-button-disabled {
+                pointer-events: none;
+
+                path {
+                    stroke: $color-grey-md;
+                }
+            }
+        }
+    }
+
+    &__inner {
+        padding: get-d(40px);
+        max-width: get-d(734px);
+        border: 1px solid rgba($color-light-blue, 0.2);
+        border-radius: get-d(24px);
+        width: 100%;
+        flex: none;
+        position: relative;
+
+        @include respond(lg) {
+            padding: get-lg(40px);
+            max-width: 100%;
+            border-radius: get-lg(24px);
+        }
+
+        @include respond(md) {
+            padding: 30px 18px;
+            border: none;
+            width: calc(100% + 32px);
+            max-width: none;
+            margin-left: -16px;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: 600;
+        }
+    }
+
+    &__table {
+        display: flex;
+        margin-top: get-d(42px);
+        position: relative;
+        z-index: 1;
+
+        @include respond(lg) {
+            margin-top: get-lg(42px);
+            justify-content: center;
+        }
+
+        @include respond(md) {
+            margin-top: 42px;
+        }
+
+        &-head {
+            padding: get-d(30px) get-d(20px);
+            border-radius: get-d(16px);
+            border: 1px solid rgba($color-white, 0.06);
+            background: $color-grey-dark;
+
+
+            @include respond(lg) {
+                padding: get-lg(30px) get-lg(20px);
+                border-radius: get-lg(16px);
+            }
+
+            @include respond(md) {
+                padding: 30px 20px;
+                border-radius: 16px;
+            }
+
+            @include respond(sm) {
+                max-width: 223px;
+            }
+        }
+
+        &-title {
+            display: flex;
+            justify-content: space-between;
+            padding: get-d(30px) get-d(16px) get-d(20px) get-d(22px);
+
+            @include respond(lg) {
+                padding: get-lg(30px) get-lg(16px) get-lg(20px) get-lg(22px);
+            }
+
+            @include respond(md) {
+                padding: 12px 0 20px;
+                max-width: 90px;
+                margin: 0 auto;
+            }
+
+            span {
+                display: block;
+                width: 100%;
+                text-align: center;
+                color: $color-grey-light;
+                font-size: get-d(14px);
+                font-weight: 600;
+                line-height: get-d(20px);
+
+                @include respond(lg) {
+                    font-size: get-lg(14px);
+                    line-height: get-lg(20px);
+                }
+
+                @include respond(md) {
+                    font-size: 12px;
+                    font-weight: 500;
+                    line-height: 16px;
+                    display: none;
+                }
+            }
+
+            &--mobile {
+                display: none !important;
+
+                @include respond(md) {
+                    display: block !important;
+                }
+            }
+
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: get-d(8px);
+            font-size: get-d(14px);
+            font-weight: 400;
+            line-height: get-d(20px);
+            letter-spacing: get-d(0.14px);
+
+            &:not(:first-child) {
+                margin-top: get-d(18px);
+
+                @include respond(lg) {
+                    margin-top: get-lg(18px);
+                }
+
+                @include respond(md) {
+                    margin-top: 16px;
+                }
+            }
+
+            @include respond(lg) {
+                gap: get-lg(8px);
+                font-size: get-lg(14px);
+                line-height: get-lg(20px);
+                letter-spacing: get-lg(0.14px);
+            }
+
+            @include respond(md) {
+                gap: 8px;
+                font-size: 12px;
+                line-height: 16px;
+                letter-spacing: 0.14px;
+            }
+
+            svg {
+                width: get-d(22px);
+                height: get-d(22px);
+                max-width: fit-content;
+
+                @include respond(lg) {
+                    width: get-lg(22px);
+                    height: get-lg(22px);
+                }
+
+                @include respond(md) {
+                    width: 22px;
+                    height: 22px;
+                }
+            }
+        }
+
+        &-logo {
+            margin-bottom: get-d(36px);
+
+            @include respond(lg) {
+                margin-bottom: get-lg(36px);
+            }
+
+            @include respond(md) {
+                margin-bottom: 32px;
+            }
+
+            a {
+                display: flex;
+                justify-content: center;
+            }
+
+            img {
+                width: get-d(76px);
+                height: get-d(17px);
+                object-fit: contain;
+
+                @include respond(lg) {
+                    width: get-lg(76px);
+                    height: get-lg(17px);
+                }
+
+                @include respond(md) {
+                    width: 64px;
+                    height: 14px;
+                }
+            }
+        }
+
+        &-body {
+            border: solid 1px rgba($color-white, 0.06);
+            border-radius: 0 get-d(16px) get-d(16px) 0;
+
+            @include respond(lg) {
+                border-radius: 0 get-lg(16px) get-lg(16px) 0;
+            }
+
+            @include respond(md) {
+                border-radius: 0 16px 16px 0;
+                width: fit-content;
+            }
+        }
+
+        &-row {
+            display: flex;
+            align-items: center;
+            background-color: $color-black;
+
+            &:not(:first-child) {
+                border-top: solid 1px rgba($color-white, 0.06);
+            }
+
+            &--item {
+                padding: get-d(10px) get-d(54px);
+
+                @include respond(lg) {
+                    padding: get-lg(10px) get-lg(54px);
+                }
+
+                @include respond(md) {
+                    padding: 9px 36px;
+                }
+
+                &:nth-child(1) {
+                    padding-left: get-d(75px);
+
+                    @include respond(lg) {
+                        padding-left: get-lg(75px);
+                    }
+
+                    @include respond(md) {
+                        padding-left: 39px;
+                    }
+                }
+
+                &:nth-child(2) {
+                    @include respond(md) {
+                        display: none;
+                    }
+                }
+
+                &:nth-child(3) {
+                    padding-right: get-d(65px);
+
+                    @include respond(lg) {
+                        padding-right: get-lg(65px);
+                    }
+
+                    @include respond(md) {
+                        padding-right: 39px;
+                        display: none;
+                    }
+                }
+
+                svg {
+                    width: get-d(20px);
+                    height: get-d(20px);
+                    max-width: fit-content;
+                    flex: none;
+
+                    @include respond(lg) {
+                        width: get-lg(20px);
+                        height: get-lg(20px);
+                    }
+
+                    @include respond(md) {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+
+            &:first-child {
+                .compare__table-row--item {
+                    padding-top: get-d(14px);
+
+                    @include respond(lg) {
+                        padding-top: get-lg(14px);
+                    }
+
+                    @include respond(md) {
+                        padding-top: 12px;
+                    }
+                }
+            }
+
+            &:last-child {
+                .compare__table-row--item {
+                    padding-bottom: get-d(14px);
+
+                    @include respond(lg) {
+                        padding-bottom: get-lg(14px);
+                    }
+
+                    @include respond(md) {
+                        padding-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__bg {
+        &-el {
+            position: absolute;
+
+            &--top {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            &--bottom {
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            &--left {
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}
