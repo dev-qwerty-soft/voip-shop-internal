@@ -227,8 +227,38 @@ get_template_part('template-blocks/breadcrumbs');
 
                         <div class="custom-cart__totals-table">
                             <div class="custom-cart__totals-row">
+                                <span class="custom-cart__totals-label"><?php esc_html_e('Subtotal', 'woocommerce'); ?></span>
+                                <span class="custom-cart__totals-value custom-cart__subtotal-value"><?php wc_cart_totals_subtotal_html(); ?></span>
+                            </div>
+                            <?php if (WC()->cart->needs_shipping()):
+                                $shipping_label = esc_html__('Shipping', 'woocommerce');
+                                $chosen_methods = WC()->session ? WC()->session->get('chosen_shipping_methods') : [];
+                                if (!empty($chosen_methods)) {
+                                    $packages = WC()->shipping()->get_packages();
+                                    if (!empty($packages)) {
+                                        $rates = current($packages)['rates'] ?? [];
+                                        $chosen_id = current($chosen_methods);
+                                        if (isset($rates[$chosen_id])) {
+                                            $shipping_label = $rates[$chosen_id]->get_label();
+                                        }
+                                    }
+                                }
+                            ?>
+                            <div class="custom-cart__totals-row">
+                                <span class="custom-cart__totals-label"><?php echo esc_html($shipping_label); ?></span>
+                                <span class="custom-cart__totals-value">
+                                    <?php if (WC()->cart->show_shipping()):
+                                        $shipping_total = WC()->cart->get_shipping_total();
+                                        echo $shipping_total > 0 ? wc_price($shipping_total) : '<strong>' . esc_html__('Free', 'woocommerce') . '</strong>';
+                                    else: ?>
+                                        <em><?php esc_html_e('Calculated at checkout', 'woocommerce'); ?></em>
+                                    <?php endif; ?>
+                                </span>
+                            </div>
+                            <?php endif; ?>
+                            <div class="custom-cart__totals-row custom-cart__totals-row--total">
                                 <span class="custom-cart__totals-label"><?php esc_html_e('Estimated Total', 'woocommerce'); ?></span>
-                                <span class="custom-cart__totals-value"><?php wc_cart_totals_order_total_html(); ?></span>
+                                <span class="custom-cart__totals-value custom-cart__total-value"><?php wc_cart_totals_order_total_html(); ?></span>
                             </div>
                         </div>
 

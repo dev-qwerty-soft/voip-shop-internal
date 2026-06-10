@@ -556,19 +556,17 @@
 
   &__totals-table {
     background: rgba(255, 255, 255, 0.14);
-    border-radius: get-d(100px);
-    padding: get-d(10px) get-d(16px);
+    border-radius: get-d(20px);
+    overflow: hidden;
     margin-bottom: get-d(24px);
 
     @include respond(lg) {
-      border-radius: get-lg(100px);
-      padding: get-lg(10px) get-lg(16px);
+      border-radius: get-lg(20px);
       margin-bottom: get-lg(24px);
     }
 
     @include respond(md) {
-      border-radius: 100px;
-      padding: 10px 16px;
+      border-radius: 20px;
       margin-bottom: 24px;
     }
   }
@@ -577,35 +575,106 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+    padding: get-d(8px) get-d(16px);
 
-  &__totals-label {
-    color: #fff;
-    font-size: get-d(16px);
-    font-weight: 500;
-    line-height: 1.5;
+    &--total {
+      padding-top: get-d(10px);
+      padding-bottom: get-d(10px);
+    }
 
     @include respond(lg) {
-      font-size: get-lg(16px);
+      padding: get-lg(8px) get-lg(16px);
+
+      &--total {
+        padding-top: get-lg(10px);
+        padding-bottom: get-lg(10px);
+      }
     }
 
     @include respond(md) {
-      font-size: 14px;
+      padding: 8px 16px;
+
+      &--total {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+
+  &__totals-label {
+    color: $color-grey-light;
+    font-size: get-d(13px);
+    font-weight: 500;
+    line-height: 1.4;
+
+    .custom-cart__totals-row--total & {
+      color: #fff;
+      font-size: get-d(14px);
+      font-weight: 600;
+    }
+
+    @include respond(lg) {
+      font-size: get-lg(13px);
+
+      .custom-cart__totals-row--total & {
+        font-size: get-lg(14px);
+      }
+    }
+
+    @include respond(md) {
+      font-size: 13px;
+
+      .custom-cart__totals-row--total & {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__totals-desc {
+    display: block;
+    font-size: get-d(11px);
+    font-weight: 400;
+    color: $color-grey-md;
+    line-height: 1.3;
+    margin-top: get-d(2px);
+
+    @include respond(lg) {
+      font-size: get-lg(11px);
+      margin-top: get-lg(2px);
+    }
+
+    @include respond(md) {
+      font-size: 11px;
+      margin-top: 2px;
     }
   }
 
   &__totals-value {
-    color: #fff;
-    font-size: get-d(16px);
+    color: $color-grey-light;
+    font-size: get-d(13px);
     font-weight: 500;
     line-height: 1.4;
 
+    .custom-cart__totals-row--total & {
+      color: #fff;
+      font-size: get-d(14px);
+      font-weight: 600;
+    }
+
     @include respond(lg) {
-      font-size: get-lg(16px);
+      font-size: get-lg(13px);
+
+      .custom-cart__totals-row--total & {
+        font-size: get-lg(14px);
+      }
     }
 
     @include respond(md) {
-      font-size: 14px;
+      font-size: 13px;
+
+      .custom-cart__totals-row--total & {
+        font-size: 14px;
+      }
     }
   }
 

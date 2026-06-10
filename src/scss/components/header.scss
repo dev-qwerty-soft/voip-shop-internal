@@ -68,7 +68,6 @@
   &__cart {
     display: flex;
     align-items: center;
-    gap: get-d(8px);
     padding: get-d(8px) get-d(16px);
     border-radius: get-d(36px);
     border: solid 1px $color-grey-md;
@@ -98,7 +97,6 @@
     }
 
     @include respond(lg) {
-      gap: get-lg(8px);
       padding: get-lg(8px) get-lg(12px);
       border-radius: get-lg(36px);
       font-size: get-lg(12px);
@@ -113,10 +111,12 @@
       width: get-d(18px);
       height: get-d(18px);
       flex-shrink: 0;
+      margin-right: get-d(4px);
 
       @include respond(lg) {
         width: get-lg(18px);
         height: get-lg(18px);
+        margin-right: get-lg(4px);
       }
     }
   }

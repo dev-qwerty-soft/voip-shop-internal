@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          // Update cart totals
+          // Update cart totals table
           if (data.data.cart_subtotal) {
             const subtotalEl = document.querySelector('.custom-cart__subtotal-value');
             if (subtotalEl) subtotalEl.innerHTML = data.data.cart_subtotal;
@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
           if (data.data.cart_total) {
             const totalEl = document.querySelector('.custom-cart__total-value');
             if (totalEl) totalEl.innerHTML = data.data.cart_total;
+          }
+          // Update header cart price
+          if (data.data.cart_header_price !== undefined) {
+            const headerPrice = document.querySelector('.header__cart-price');
+            if (headerPrice) headerPrice.textContent = data.data.cart_header_price;
           }
           // Update item subtotal
           if (data.data.item_subtotal) {
