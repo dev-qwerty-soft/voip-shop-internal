@@ -9,13 +9,26 @@ document.addEventListener('DOMContentLoaded', () => {
     formData.append('cart_item_key', cartItemKey);
     formData.append('quantity', quantity);
 
+    const totalsTable = document.querySelector('.custom-cart__totals-table');
+    if (totalsTable) totalsTable.classList.add('custom-cart__totals-table--loading');
+
     fetch(window.ajaxurl || '/wp-admin/admin-ajax.php', {
       method: 'POST',
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
+        if (totalsTable) totalsTable.classList.remove('custom-cart__totals-table--loading');
         if (data.success) {
+          if (quantity === 0) {
+            document.querySelectorAll(`[data-cart-item-key="${cartItemKey}"]`).forEach((el) => el.remove());
+            const remaining = document.querySelectorAll('.custom-cart__item');
+            if (remaining.length === 0) {
+              location.reload();
+              return;
+            }
+          }
+
           // Update cart totals table
           if (data.data.cart_subtotal) {
             const subtotalEl = document.querySelector('.custom-cart__subtotal-value');
@@ -30,6 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const headerPrice = document.querySelector('.header__cart-price');
             if (headerPrice) headerPrice.textContent = data.data.cart_header_price;
           }
+          // Update shipping label and value
+          if (data.data.shipping_label !== undefined) {
+            const shippingLabel = document.querySelector('.custom-cart__shipping-label');
+            if (shippingLabel) shippingLabel.textContent = data.data.shipping_label;
+          }
+          if (data.data.shipping_html !== undefined) {
+            const shippingEl = document.querySelector('.custom-cart__shipping-value');
+            if (shippingEl) shippingEl.innerHTML = data.data.shipping_html;
+          }
           // Update item subtotal
           if (data.data.item_subtotal) {
             const itemPrices = document.querySelectorAll(`[data-cart-item-key="${cartItemKey}"] .custom-cart__item-price`);
@@ -39,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isProcessing = false;
       })
       .catch((error) => {
+        if (totalsTable) totalsTable.classList.remove('custom-cart__totals-table--loading');
         console.error('Cart update error:', error);
         isProcessing = false;
       });

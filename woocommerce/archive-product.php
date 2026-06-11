@@ -44,7 +44,7 @@ get_header();
     <div class="container">
       <div class="shop-hero__content">
         <h1 class="shop-hero__title" data-aos="fade-up" data-aos-delay="100">Shop</h1>
-        <p class="shop-hero__description simple-text" data-aos="fade-up" data-aos-delay="200">Lorem ipsum dolor sit amet consectetur. Facilisi pellentesque aliquam ut curabitur congue pellentesque pharetra.</p>
+        <p class="shop-hero__description simple-text" data-aos="fade-up" data-aos-delay="200">Browse the VOIPx3 equipment catalog for business communications: IP phones, DECT systems, headsets, video conferencing solutions, networking devices, and accessories. Filter by category and price to find the right fit for your needs.</p>
       </div>
     </div>
   </section>

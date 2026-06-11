@@ -106,6 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
     modules: [Navigation, Thumbs],
   });
 
+  if (swiperProductImages.slides && swiperProductImages.slides.length <= 1) {
+    document.querySelectorAll('.custom-product__arrow').forEach((el) => (el.style.display = 'none'));
+  }
+
 
   var compareSlider = new Swiper('.compare__reviews-list', {
     spaceBetween: 30,

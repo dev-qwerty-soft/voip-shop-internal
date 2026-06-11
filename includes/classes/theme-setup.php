@@ -79,6 +79,7 @@ class ThemeSetup
     wp_localize_script('theme-scripts', 'themeAjax', [
       'ajaxurl' => admin_url('admin-ajax.php'),
       'nonce' => wp_create_nonce('theme_nonce'),
+      'price_range' => function_exists('voip_get_price_range') ? voip_get_price_range() : ['min' => 0, 'max' => 1000],
     ]);
   }
 
