@@ -163,6 +163,44 @@ function load_shop_subcategories()
 add_action('wp_ajax_load_shop_products', 'load_shop_products');
 add_action('wp_ajax_nopriv_load_shop_products', 'load_shop_products');
 
+function get_price_range_for_tax_query($tax_query = [])
+{
+  global $wpdb;
+
+  $has_tax_filter = count($tax_query) > 1;
+
+  if (!$has_tax_filter) {
+    if (function_exists('voip_get_price_range')) {
+      return voip_get_price_range();
+    }
+    $min = (float) $wpdb->get_var("SELECT MIN(CAST(meta_value AS DECIMAL(10,2))) FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE pm.meta_key = '_price' AND p.post_status = 'publish' AND p.post_type = 'product' AND pm.meta_value != '' AND CAST(pm.meta_value AS DECIMAL(10,2)) > 0");
+    $max = (float) $wpdb->get_var("SELECT MAX(CAST(meta_value AS DECIMAL(10,2))) FROM {$wpdb->postmeta} pm INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id WHERE pm.meta_key = '_price' AND p.post_status = 'publish' AND p.post_type = 'product' AND pm.meta_value != ''");
+    return ['min' => $min ? (int) floor($min) : 0, 'max' => $max ? (int) ceil($max) : 1000];
+  }
+
+  $ids_query = new WP_Query([
+    'post_type'      => 'product',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'fields'         => 'ids',
+    'tax_query'      => $tax_query,
+    'no_found_rows'  => true,
+  ]);
+
+  if (empty($ids_query->posts)) {
+    return ['min' => 0, 'max' => 1000];
+  }
+
+  $ids = implode(',', array_map('intval', $ids_query->posts));
+  $min = (float) $wpdb->get_var("SELECT MIN(CAST(meta_value AS DECIMAL(10,2))) FROM {$wpdb->postmeta} WHERE meta_key = '_price' AND post_id IN ($ids) AND meta_value != '' AND CAST(meta_value AS DECIMAL(10,2)) > 0");
+  $max = (float) $wpdb->get_var("SELECT MAX(CAST(meta_value AS DECIMAL(10,2))) FROM {$wpdb->postmeta} WHERE meta_key = '_price' AND post_id IN ($ids) AND meta_value != ''");
+
+  return [
+    'min' => $min ? (int) floor($min) : 0,
+    'max' => $max ? (int) ceil($max) : 1000,
+  ];
+}
+
 function load_shop_products()
 {
   $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
@@ -170,19 +208,21 @@ function load_shop_products()
   $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'menu_order';
   $categories = isset($_POST['categories']) ? array_map('sanitize_text_field', $_POST['categories']) : [];
   $subcategories = isset($_POST['subcategories']) ? array_map('sanitize_text_field', $_POST['subcategories']) : [];
-  $price_min = isset($_POST['priceMin']) && !empty($_POST['priceMin']) ? floatval($_POST['priceMin']) : 0;
-  $price_max = isset($_POST['priceMax']) && !empty($_POST['priceMax']) ? floatval($_POST['priceMax']) : 1000;
+
+  $has_price_min = isset($_POST['priceMin']) && $_POST['priceMin'] !== '';
+  $has_price_max = isset($_POST['priceMax']) && $_POST['priceMax'] !== '';
+  $price_min = $has_price_min ? floatval($_POST['priceMin']) : null;
+  $price_max = $has_price_max ? floatval($_POST['priceMax']) : null;
 
   shop_ajax_log("SHOP PRODUCTS DEBUG - Page: $page, Orderby: $orderby");
   shop_ajax_log('SHOP PRODUCTS DEBUG - Categories: ' . implode(', ', $categories));
   shop_ajax_log('SHOP PRODUCTS DEBUG - Subcategories: ' . implode(', ', $subcategories));
-  shop_ajax_log("SHOP PRODUCTS DEBUG - Price range: $price_min - $price_max");
+  shop_ajax_log('SHOP PRODUCTS DEBUG - Price range: ' . ($has_price_min ? $price_min : 'any') . ' - ' . ($has_price_max ? $price_max : 'any'));
   shop_ajax_log('SHOP PRODUCTS DEBUG - Categories empty? ' . (empty($categories) ? 'YES' : 'NO'));
   shop_ajax_log('SHOP PRODUCTS DEBUG - Subcategories empty? ' . (empty($subcategories) ? 'YES' : 'NO'));
 
   // If no filters are applied and we're on a category page, don't show all products
-  if (empty($categories) && empty($subcategories) && $price_min == 0 && $price_max == 1000) {
-    // Check if we're being called from a category page incorrectly
+  if (empty($categories) && empty($subcategories) && !$has_price_min && !$has_price_max) {
     if (isset($_POST['category_id'])) {
       shop_ajax_log('SHOP PRODUCTS DEBUG - Category page detected, skipping shop products query');
       wp_send_json_error('This should use category products handler');
@@ -196,12 +236,14 @@ function load_shop_products()
     'post_status' => 'publish',
   ];
 
-  if ($price_min > 0 || $price_max < 1000) {
+  if ($has_price_min || $has_price_max) {
+    $filter_min = $price_min ?? 0;
+    $filter_max = $price_max ?? PHP_INT_MAX;
     $args['meta_query'][] = [
       'relation' => 'OR',
       [
         'key' => '_price',
-        'value' => [$price_min, $price_max],
+        'value' => [$filter_min, $filter_max],
         'compare' => 'BETWEEN',
         'type' => 'NUMERIC',
       ],
@@ -209,13 +251,13 @@ function load_shop_products()
         'relation' => 'AND',
         [
           'key' => '_min_variation_price',
-          'value' => $price_max,
+          'value' => $filter_max,
           'compare' => '<=',
           'type' => 'NUMERIC',
         ],
         [
           'key' => '_max_variation_price',
-          'value' => $price_min,
+          'value' => $filter_min,
           'compare' => '>=',
           'type' => 'NUMERIC',
         ],
@@ -283,6 +325,7 @@ function load_shop_products()
     'max_pages' => $max_pages,
     'current_page' => $page,
     'pagination' => generate_shop_pagination($page, $max_pages),
+    'price_range' => get_price_range_for_tax_query($tax_query),
   ]);
 }
 

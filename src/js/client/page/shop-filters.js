@@ -7,6 +7,13 @@ jQuery(document).ready(function ($) {
     orderby: 'popularity',
   };
 
+  // Dynamic price range — updated from server after each loadProducts call
+  let priceRangeMin = (window.themeAjax && window.themeAjax.price_range) ? parseFloat(window.themeAjax.price_range.min) : 0;
+  let priceRangeMax = (window.themeAjax && window.themeAjax.price_range) ? parseFloat(window.themeAjax.price_range.max) : 1000;
+
+  // Exposed so loadProducts can call it after AJAX response
+  let updatePriceRange;
+
   function initShopPage() {
     initPriceSlider();
     bindEvents();
@@ -25,17 +32,32 @@ jQuery(document).ready(function ($) {
     const mobilePriceMin = $('#mobilePriceMin');
     const mobilePriceMax = $('#mobilePriceMax');
 
-    // Set initial values for sliders
-    minRange.val(0);
-    maxRange.val(1000);
-    mobileMinRange.val(0);
-    mobileMaxRange.val(1000);
+    function applyRangeBounds() {
+      [minRange, mobileMinRange].forEach((el) => el.attr('min', priceRangeMin).attr('max', priceRangeMax));
+      [maxRange, mobileMaxRange].forEach((el) => el.attr('min', priceRangeMin).attr('max', priceRangeMax));
+      // Update number inputs: bounds + placeholder
+      priceMin.attr('min', priceRangeMin).attr('max', priceRangeMax).attr('placeholder', priceRangeMin);
+      priceMax.attr('min', priceRangeMin).attr('max', priceRangeMax).attr('placeholder', priceRangeMax);
+      mobilePriceMin.attr('min', priceRangeMin).attr('max', priceRangeMax).attr('placeholder', priceRangeMin);
+      mobilePriceMax.attr('min', priceRangeMin).attr('max', priceRangeMax).attr('placeholder', priceRangeMax);
+    }
 
-    // Set initial values for inputs (empty by default)
-    priceMin.val('');
-    priceMax.val('');
-    mobilePriceMin.val('');
-    mobilePriceMax.val('');
+    // Set initial values for sliders and inputs using dynamic range
+    applyRangeBounds();
+    minRange.val(priceRangeMin);
+    maxRange.val(priceRangeMax);
+    mobileMinRange.val(priceRangeMin);
+    mobileMaxRange.val(priceRangeMax);
+    priceMin.val(priceRangeMin);
+    priceMax.val(priceRangeMax);
+    mobilePriceMin.val(priceRangeMin);
+    mobilePriceMax.val(priceRangeMax);
+
+    function calcPercents(val, rangeMin, rangeMax) {
+      const span = rangeMax - rangeMin;
+      if (span <= 0) return 0;
+      return ((val - rangeMin) / span) * 100;
+    }
 
     function updateSlider(context = 'desktop', skipLoading = false) {
       let minRangeEl, maxRangeEl, priceMinEl, priceMaxEl;
@@ -66,11 +88,11 @@ jQuery(document).ready(function ($) {
       priceMinEl.val(minRangeEl.val());
       priceMaxEl.val(maxRangeEl.val());
 
-      // Update green track width
+      // Update green track width using dynamic range
       const minVal = parseInt(minRangeEl.val());
       const maxVal = parseInt(maxRangeEl.val());
-      const minPercent = (minVal / 1000) * 100;
-      const maxPercent = (maxVal / 1000) * 100;
+      const minPercent = calcPercents(minVal, priceRangeMin, priceRangeMax);
+      const maxPercent = calcPercents(maxVal, priceRangeMin, priceRangeMax);
       const activeWidth = maxPercent - minPercent;
       const activeLeft = minPercent;
 
@@ -98,16 +120,16 @@ jQuery(document).ready(function ($) {
         maxRangeEl = maxRange;
       }
 
-      const min = parseInt(priceMinEl.val()) || 0;
-      const max = parseInt(priceMaxEl.val()) || 1000;
+      const min = parseInt(priceMinEl.val()) || priceRangeMin;
+      const max = parseInt(priceMaxEl.val()) || priceRangeMax;
 
       if (min <= max) {
         minRangeEl.val(min);
         maxRangeEl.val(max);
 
-        // Update green track width
-        const minPercent = (min / 1000) * 100;
-        const maxPercent = (max / 1000) * 100;
+        // Update green track width using dynamic range
+        const minPercent = calcPercents(min, priceRangeMin, priceRangeMax);
+        const maxPercent = calcPercents(max, priceRangeMin, priceRangeMax);
         const activeWidth = maxPercent - minPercent;
         const activeLeft = minPercent;
 
@@ -120,6 +142,39 @@ jQuery(document).ready(function ($) {
         }
       }
     }
+
+    // Called from loadProducts after AJAX response — updates slider bounds without resetting selection
+    updatePriceRange = function (newMin, newMax) {
+      if (newMin === priceRangeMin && newMax === priceRangeMax) return;
+
+      priceRangeMin = newMin;
+      priceRangeMax = newMax;
+      applyRangeBounds();
+
+      // Clip slider values if out of bounds
+      const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+      const clampedMin = clamp(parseInt(minRange.val()), priceRangeMin, priceRangeMax);
+      const clampedMax = clamp(parseInt(maxRange.val()), priceRangeMin, priceRangeMax);
+      minRange.val(clampedMin);
+      mobileMinRange.val(clampedMin);
+      maxRange.val(clampedMax);
+      mobileMaxRange.val(clampedMax);
+
+      // Clip number inputs if out of bounds
+      const inputMinVal = parseInt(priceMin.val());
+      const inputMaxVal = parseInt(priceMax.val());
+      if (!isNaN(inputMinVal) && (inputMinVal < priceRangeMin || inputMinVal > priceRangeMax)) {
+        priceMin.val(priceRangeMin);
+        mobilePriceMin.val(priceRangeMin);
+      }
+      if (!isNaN(inputMaxVal) && (inputMaxVal > priceRangeMax || inputMaxVal < priceRangeMin)) {
+        priceMax.val(priceRangeMax);
+        mobilePriceMax.val(priceRangeMax);
+      }
+
+      updateSlider('desktop', true);
+      updateSlider('mobile', true);
+    };
 
     // Desktop events
     minRange.on('change', function () {
@@ -177,6 +232,11 @@ jQuery(document).ready(function ($) {
           $('#productsGrid').html(response.data.products);
           $('#shopPagination').html(response.data.pagination);
           $('#resultsCount').text(`(${response.data.total} results)`);
+
+          // Update price slider range based on current filter context
+          if (response.data.price_range && typeof updatePriceRange === 'function') {
+            updatePriceRange(response.data.price_range.min, response.data.price_range.max);
+          }
 
           // Update mobile results count
           const mobileResultsCountEl = document.getElementById('mobileResultsCount');
@@ -426,16 +486,18 @@ jQuery(document).ready(function ($) {
     $('#clearAllFilters, #clearFiltersButton').on('click', function () {
       $('.filter-checkbox input').prop('checked', false);
 
-      // Reset desktop price inputs and sliders
-      $('#priceMin, #priceMax').val('');
-      $('#minRange').val(0);
-      $('#maxRange').val(1000);
+      // Reset desktop price inputs and sliders to current dynamic range
+      $('#priceMin').val(priceRangeMin);
+      $('#priceMax').val(priceRangeMax);
+      $('#minRange').val(priceRangeMin);
+      $('#maxRange').val(priceRangeMax);
       $('.shop-sidebar .slider-track').attr('style', '--active-width: 100%; --active-left: 0%;');
 
-      // Reset mobile price inputs and sliders
-      $('#mobilePriceMin, #mobilePriceMax').val('');
-      $('#mobileMinRange').val(0);
-      $('#mobileMaxRange').val(1000);
+      // Reset mobile price inputs and sliders to current dynamic range
+      $('#mobilePriceMin').val(priceRangeMin);
+      $('#mobilePriceMax').val(priceRangeMax);
+      $('#mobileMinRange').val(priceRangeMin);
+      $('#mobileMaxRange').val(priceRangeMax);
       $('.mobile-filters-modal .slider-track').attr('style', '--active-width: 100%; --active-left: 0%;');
 
       // Reset custom dropdown
@@ -446,8 +508,8 @@ jQuery(document).ready(function ($) {
 
       currentFilters = {
         categories: [],
-        priceMin: '',
-        priceMax: '',
+        priceMin: String(priceRangeMin),
+        priceMax: String(priceRangeMax),
         orderby: 'popularity',
       };
       currentPage = 1;
@@ -508,10 +570,11 @@ jQuery(document).ready(function ($) {
     mobileClearAllFilters?.addEventListener('click', function () {
       $('.mobile-filters-modal .filter-checkbox input').prop('checked', false);
 
-      // Reset mobile price inputs and sliders
-      $('#mobilePriceMin, #mobilePriceMax').val('');
-      $('#mobileMinRange').val(0);
-      $('#mobileMaxRange').val(1000);
+      // Reset mobile price inputs and sliders to current dynamic range
+      $('#mobilePriceMin').val(priceRangeMin);
+      $('#mobilePriceMax').val(priceRangeMax);
+      $('#mobileMinRange').val(priceRangeMin);
+      $('#mobileMaxRange').val(priceRangeMax);
       $('.mobile-filters-modal .slider-track').attr('style', '--active-width: 100%; --active-left: 0%;');
 
       // Close category filter groups only — price filter stays open
@@ -695,8 +758,8 @@ jQuery(document).ready(function ($) {
       const priceMax = $('#mobilePriceMax').val();
 
       let count = checkedFilters;
-      if (priceMin && priceMin !== '0') count++;
-      if (priceMax && priceMax !== '1000') count++;
+      if (priceMin && priceMin !== String(priceRangeMin)) count++;
+      if (priceMax && priceMax !== String(priceRangeMax)) count++;
 
       if (filtersCountEl) {
         filtersCountEl.textContent = count;

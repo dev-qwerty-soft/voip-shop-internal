@@ -174,3 +174,37 @@ add_action('init', function () {
         10
     );
 });
+
+function voip_get_price_range() {
+  $cached = get_transient('voip_global_price_range');
+  if ($cached !== false) return $cached;
+
+  global $wpdb;
+  $min = (float) $wpdb->get_var("
+    SELECT MIN(CAST(meta_value AS DECIMAL(10,2)))
+    FROM {$wpdb->postmeta} pm
+    INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+    WHERE pm.meta_key = '_price'
+      AND p.post_status = 'publish'
+      AND p.post_type = 'product'
+      AND pm.meta_value != ''
+      AND CAST(pm.meta_value AS DECIMAL(10,2)) > 0
+  ");
+  $max = (float) $wpdb->get_var("
+    SELECT MAX(CAST(meta_value AS DECIMAL(10,2)))
+    FROM {$wpdb->postmeta} pm
+    INNER JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+    WHERE pm.meta_key = '_price'
+      AND p.post_status = 'publish'
+      AND p.post_type = 'product'
+      AND pm.meta_value != ''
+  ");
+
+  $range = [
+    'min' => $min ? (int) floor($min) : 0,
+    'max' => $max ? (int) ceil($max) : 1000,
+  ];
+
+  set_transient('voip_global_price_range', $range, HOUR_IN_SECONDS);
+  return $range;
+}
