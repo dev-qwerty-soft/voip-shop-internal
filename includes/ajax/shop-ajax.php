@@ -188,7 +188,7 @@ function get_price_range_for_tax_query($tax_query = [])
   ]);
 
   if (empty($ids_query->posts)) {
-    return ['min' => 0, 'max' => 1000];
+    return function_exists('voip_get_price_range') ? voip_get_price_range() : ['min' => 0, 'max' => 1000];
   }
 
   $ids = implode(',', array_map('intval', $ids_query->posts));
@@ -203,6 +203,10 @@ function get_price_range_for_tax_query($tax_query = [])
 
 function load_shop_products()
 {
+  if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'theme_nonce')) {
+    wp_send_json_error('Invalid nonce');
+  }
+
   $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
   $posts_per_page = 16;
   $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'menu_order';
@@ -220,14 +224,6 @@ function load_shop_products()
   shop_ajax_log('SHOP PRODUCTS DEBUG - Price range: ' . ($has_price_min ? $price_min : 'any') . ' - ' . ($has_price_max ? $price_max : 'any'));
   shop_ajax_log('SHOP PRODUCTS DEBUG - Categories empty? ' . (empty($categories) ? 'YES' : 'NO'));
   shop_ajax_log('SHOP PRODUCTS DEBUG - Subcategories empty? ' . (empty($subcategories) ? 'YES' : 'NO'));
-
-  // If no filters are applied and we're on a category page, don't show all products
-  if (empty($categories) && empty($subcategories) && !$has_price_min && !$has_price_max) {
-    if (isset($_POST['category_id'])) {
-      shop_ajax_log('SHOP PRODUCTS DEBUG - Category page detected, skipping shop products query');
-      wp_send_json_error('This should use category products handler');
-    }
-  }
 
   $args = [
     'post_type' => 'product',
@@ -329,92 +325,6 @@ function load_shop_products()
   ]);
 }
 
-add_action('wp_ajax_filter_shop_products', 'filter_shop_products');
-add_action('wp_ajax_nopriv_filter_shop_products', 'filter_shop_products');
-
-function filter_shop_products()
-{
-  $categories = isset($_POST['categories']) ? $_POST['categories'] : [];
-  $subcategories = isset($_POST['subcategories']) ? $_POST['subcategories'] : [];
-  $orderby = isset($_POST['orderby']) ? sanitize_text_field($_POST['orderby']) : 'menu_order';
-  $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
-  $posts_per_page = 16;
-
-  shop_ajax_log('Filter Products - Categories: ' . print_r($categories, true));
-  shop_ajax_log('Filter Products - Subcategories: ' . print_r($subcategories, true));
-  $args = [
-    'post_type' => 'product',
-    'posts_per_page' => $posts_per_page,
-    'paged' => $page,
-    'post_status' => 'publish',
-    // Temporarily removed filter if available
-    // 'meta_query' => array(
-    //     array(
-    //         'key' => '_stock_status',
-    //         'value' => 'instock'
-    //     )
-    // )
-  ];
-
-  $tax_query = ['relation' => 'AND'];
-
-  if (!empty($categories) && !in_array('all', $categories)) {
-    $tax_query[] = [
-      'taxonomy' => 'product_cat',
-      'field' => 'slug',
-      'terms' => $categories,
-      'operator' => 'IN',
-    ];
-  }
-
-  if (!empty($subcategories)) {
-    $tax_query[] = [
-      'taxonomy' => 'product_cat',
-      'field' => 'slug',
-      'terms' => $subcategories,
-      'operator' => 'IN',
-    ];
-  }
-
-  if (count($tax_query) > 0) {
-    $args['tax_query'] = $tax_query;
-  }
-
-  shop_ajax_log('Query args: ' . print_r($args, true));
-
-  $args = applyShopOrderby($args, $orderby);
-
-  $query = new WP_Query($args);
-  $products_html = '';
-  $total_products = $query->found_posts;
-  $max_pages = $query->max_num_pages;
-
-  shop_ajax_log('Shop AJAX Debug - Query args: ' . print_r($args, true));
-  shop_ajax_log('Shop AJAX Debug - Found posts: ' . $total_products);
-
-  if ($query->have_posts()) {
-    ob_start();
-    while ($query->have_posts()) {
-      $query->the_post();
-      $product = wc_get_product(get_the_ID());
-      if ($product) {
-        set_query_var('product', $product);
-        get_template_part('template-parts/product-card');
-      }
-    }
-    wp_reset_postdata();
-    $products_html = ob_get_clean();
-  }
-
-  wp_send_json_success([
-    'products' => $products_html,
-    'total' => $total_products,
-    'max_pages' => $max_pages,
-    'current_page' => $page,
-    'pagination' => generate_shop_pagination($page, $max_pages),
-  ]);
-}
-
 add_action('wp_ajax_get_shop_categories', 'get_shop_categories');
 add_action('wp_ajax_nopriv_get_shop_categories', 'get_shop_categories');
 
@@ -466,47 +376,15 @@ function get_shop_categories()
   wp_send_json_success($result);
 }
 
-add_action('wp_ajax_get_product_categories', 'get_product_categories');
-add_action('wp_ajax_nopriv_get_product_categories', 'get_product_categories');
-
-function get_product_categories()
-{
-  $categories = get_terms([
-    'taxonomy' => 'product_cat',
-    'hide_empty' => true,
-    'parent' => 0,
-    'orderby' => 'count',
-    'order' => 'DESC',
-  ]);
-
-  $result = [];
-
-  if (!empty($categories) && !is_wp_error($categories)) {
-    foreach ($categories as $category) {
-      $result[] = [
-        'id' => $category->term_id,
-        'slug' => $category->slug,
-        'name' => $category->name,
-        'count' => $category->count,
-      ];
-    }
-  }
-
-  wp_send_json_success($result);
-}
-
 // AJAX handler for category pages
 add_action('wp_ajax_filter_category_products', 'handle_category_products_ajax');
 add_action('wp_ajax_nopriv_filter_category_products', 'handle_category_products_ajax');
 
-// New separate handler for category pages only
-add_action('wp_ajax_load_category_products_only', 'handle_category_only_ajax');
-add_action('wp_ajax_nopriv_load_category_products_only', 'handle_category_only_ajax');
 
 function handle_category_products_ajax()
 {
   $nonce = $_POST['nonce'] ?? '';
-  if (!wp_verify_nonce($nonce, 'shop_ajax_nonce')) {
+  if (!wp_verify_nonce($nonce, 'theme_nonce')) {
     wp_send_json_error('Invalid nonce');
   }
 
@@ -600,92 +478,6 @@ function handle_category_products_ajax()
   wp_send_json_success($result);
 }
 
-function handle_category_only_ajax()
-{
-  shop_ajax_log('CATEGORY AJAX DEBUG - Function handle_category_only_ajax called');
-
-  $nonce = $_POST['nonce'] ?? '';
-  if (!wp_verify_nonce($nonce, 'shop_ajax_nonce')) {
-    wp_send_json_error('Invalid nonce');
-  }
-
-  $page = intval($_POST['page'] ?? 1);
-  $orderby = sanitize_text_field($_POST['orderby'] ?? 'menu_order');
-  $category_id = intval($_POST['category_id'] ?? 0);
-
-  if (!$category_id) {
-    wp_send_json_error('Invalid category ID');
-  }
-
-  // Get the current category
-  $current_category = get_term($category_id, 'product_cat');
-  if (!$current_category || is_wp_error($current_category)) {
-    wp_send_json_error('Category not found');
-  }
-
-  // Query args for ONLY this exact category - no children
-  $args = [
-    'post_type' => 'product',
-    'post_status' => 'publish',
-    'posts_per_page' => 12,
-    'paged' => $page,
-    'tax_query' => [
-      [
-        'taxonomy' => 'product_cat',
-        'field' => 'term_id',
-        'terms' => $category_id,
-        'include_children' => false, // CRITICAL: exclude children
-      ],
-    ],
-    'meta_query' => [
-      [
-        'key' => '_stock_status',
-        'value' => 'instock',
-        'compare' => '=',
-      ],
-    ],
-  ];
-
-  // Handle sorting
-
-  $args = applyShopOrderby($args, $orderby);
-
-  $products_query = new WP_Query($args);
-  $total_pages = $products_query->max_num_pages;
-  $found_posts = $products_query->found_posts;
-
-  ob_start();
-
-  if ($products_query->have_posts()):
-    while ($products_query->have_posts()):
-      $products_query->the_post();
-      $product = wc_get_product(get_the_ID());
-      if ($product):
-        set_query_var('product', $product);
-        get_template_part('template-parts/product-card');
-      endif;
-    endwhile;
-    wp_reset_postdata();
-  endif;
-
-  $products_html = ob_get_clean();
-
-  $pagination_html = '';
-  if ($total_pages > 1) {
-    $pagination_html = generate_shop_pagination($page, $total_pages);
-  }
-
-  $result = [
-    'products' => $products_html,
-    'pagination' => $pagination_html,
-    'found_posts' => $found_posts,
-    'current_page' => $page,
-    'total_pages' => $total_pages,
-  ];
-
-  wp_send_json_success($result);
-}
-
 // Adding AJAX endpoint
 add_action('wp_ajax_custom_add_to_cart', 'custom_add_to_cart');
 add_action('wp_ajax_nopriv_custom_add_to_cart', 'custom_add_to_cart');
@@ -694,10 +486,10 @@ function custom_add_to_cart()
 {
 
   $nonce = $_POST['nonce'] ?? '';
-  if (!wp_verify_nonce($nonce, 'shop_ajax_nonce')) {
+  if (!wp_verify_nonce($nonce, 'theme_nonce')) {
     wp_send_json_error('Invalid nonce');
   }
-  
+
   $product_id = intval($_POST['product_id']);
 
   if (!$product_id) {

@@ -214,6 +214,7 @@ jQuery(document).ready(function ($) {
 
     const data = {
       action: 'load_shop_products',
+      nonce: window.themeAjax?.nonce,
       page: page,
       orderby: currentFilters.orderby,
       categories: getAllSelectedCategories(),
