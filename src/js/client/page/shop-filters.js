@@ -425,10 +425,18 @@ jQuery(document).ready(function ($) {
 
     $('#clearAllFilters, #clearFiltersButton').on('click', function () {
       $('.filter-checkbox input').prop('checked', false);
+
+      // Reset desktop price inputs and sliders
       $('#priceMin, #priceMax').val('');
-      $('#minRange, #maxRange').val('');
       $('#minRange').val(0);
       $('#maxRange').val(1000);
+      $('.shop-sidebar .slider-track').attr('style', '--active-width: 100%; --active-left: 0%;');
+
+      // Reset mobile price inputs and sliders
+      $('#mobilePriceMin, #mobilePriceMax').val('');
+      $('#mobileMinRange').val(0);
+      $('#mobileMaxRange').val(1000);
+      $('.mobile-filters-modal .slider-track').attr('style', '--active-width: 100%; --active-left: 0%;');
 
       // Reset custom dropdown
       $('.dropdown-selected').attr('data-value', 'popularity');
@@ -499,14 +507,17 @@ jQuery(document).ready(function ($) {
     // Mobile clear all filters
     mobileClearAllFilters?.addEventListener('click', function () {
       $('.mobile-filters-modal .filter-checkbox input').prop('checked', false);
+
+      // Reset mobile price inputs and sliders
       $('#mobilePriceMin, #mobilePriceMax').val('');
       $('#mobileMinRange').val(0);
       $('#mobileMaxRange').val(1000);
+      $('.mobile-filters-modal .slider-track').attr('style', '--active-width: 100%; --active-left: 0%;');
 
-      // Close all opened filter groups
-      $('.mobile-filters-modal .filter-group').removeClass('active');
-      $('.mobile-filters-modal .filter-group__content').removeClass('visible').addClass('hidden');
-      $('.mobile-filters-modal .toggle-icon img').removeClass('rotated');
+      // Close category filter groups only — price filter stays open
+      $('.mobile-filters-modal .filter-group:not(.price-filter-group)').removeClass('active');
+      $('.mobile-filters-modal .filter-group:not(.price-filter-group) .filter-group__content').removeClass('visible').addClass('hidden');
+      $('.mobile-filters-modal .filter-group:not(.price-filter-group) .toggle-icon img').removeClass('rotated');
 
       updateFiltersCount();
       updateMobileResultsCount();

@@ -1,5 +1,16 @@
 <?php
 
+// Set to true to enable debug logging in error log
+define('SHOP_AJAX_DEBUG', false);
+
+if (!function_exists('shop_ajax_log')) {
+  function shop_ajax_log($message) {
+    if (SHOP_AJAX_DEBUG) {
+      error_log($message);
+    }
+  }
+}
+
 if (!function_exists('parse_weight_related')) {
   function parse_weight_related($label)
   {
@@ -162,19 +173,18 @@ function load_shop_products()
   $price_min = isset($_POST['priceMin']) && !empty($_POST['priceMin']) ? floatval($_POST['priceMin']) : 0;
   $price_max = isset($_POST['priceMax']) && !empty($_POST['priceMax']) ? floatval($_POST['priceMax']) : 1000;
 
-  // Debug logging to see what filters are being applied
-  error_log("SHOP PRODUCTS DEBUG - Page: $page, Orderby: $orderby");
-  error_log('SHOP PRODUCTS DEBUG - Categories: ' . implode(', ', $categories));
-  error_log('SHOP PRODUCTS DEBUG - Subcategories: ' . implode(', ', $subcategories));
-  error_log("SHOP PRODUCTS DEBUG - Price range: $price_min - $price_max");
-  error_log('SHOP PRODUCTS DEBUG - Categories empty? ' . (empty($categories) ? 'YES' : 'NO'));
-  error_log('SHOP PRODUCTS DEBUG - Subcategories empty? ' . (empty($subcategories) ? 'YES' : 'NO'));
+  shop_ajax_log("SHOP PRODUCTS DEBUG - Page: $page, Orderby: $orderby");
+  shop_ajax_log('SHOP PRODUCTS DEBUG - Categories: ' . implode(', ', $categories));
+  shop_ajax_log('SHOP PRODUCTS DEBUG - Subcategories: ' . implode(', ', $subcategories));
+  shop_ajax_log("SHOP PRODUCTS DEBUG - Price range: $price_min - $price_max");
+  shop_ajax_log('SHOP PRODUCTS DEBUG - Categories empty? ' . (empty($categories) ? 'YES' : 'NO'));
+  shop_ajax_log('SHOP PRODUCTS DEBUG - Subcategories empty? ' . (empty($subcategories) ? 'YES' : 'NO'));
 
   // If no filters are applied and we're on a category page, don't show all products
   if (empty($categories) && empty($subcategories) && $price_min == 0 && $price_max == 1000) {
     // Check if we're being called from a category page incorrectly
     if (isset($_POST['category_id'])) {
-      error_log('SHOP PRODUCTS DEBUG - Category page detected, skipping shop products query');
+      shop_ajax_log('SHOP PRODUCTS DEBUG - Category page detected, skipping shop products query');
       wp_send_json_error('This should use category products handler');
     }
   }
@@ -239,8 +249,7 @@ function load_shop_products()
     $args['tax_query'] = $tax_query;
   }
 
-  // Log the final args for debugging
-  error_log('SHOP PRODUCTS DEBUG - Final args: ' . print_r($args, true));
+  shop_ajax_log('SHOP PRODUCTS DEBUG - Final args: ' . print_r($args, true));
 
   $args = applyShopOrderby($args, $orderby);
 
@@ -249,10 +258,9 @@ function load_shop_products()
   $total_products = $query->found_posts;
   $max_pages = $query->max_num_pages;
 
-  // log
-  error_log("SHOP DEBUG - Page: $page, Total: $total_products, Max pages: $max_pages, Posts per page: $posts_per_page");
-  error_log('SHOP DEBUG - Query post count: ' . $query->post_count);
-  error_log('SHOP DEBUG - Found posts: ' . $query->found_posts);
+  shop_ajax_log("SHOP DEBUG - Page: $page, Total: $total_products, Max pages: $max_pages, Posts per page: $posts_per_page");
+  shop_ajax_log('SHOP DEBUG - Query post count: ' . $query->post_count);
+  shop_ajax_log('SHOP DEBUG - Found posts: ' . $query->found_posts);
 
   if ($query->have_posts()) {
     ob_start();
@@ -289,11 +297,8 @@ function filter_shop_products()
   $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
   $posts_per_page = 16;
 
-  error_log('Filter Products - Categories: ' . print_r($categories, true));
-  error_log('Filter Products - Subcategories: ' . print_r($subcategories, true));
-
-  error_log('Shop AJAX Debug - Categories: ' . print_r($categories, true));
-  error_log('Shop AJAX Debug - Subcategories: ' . print_r($subcategories, true));
+  shop_ajax_log('Filter Products - Categories: ' . print_r($categories, true));
+  shop_ajax_log('Filter Products - Subcategories: ' . print_r($subcategories, true));
   $args = [
     'post_type' => 'product',
     'posts_per_page' => $posts_per_page,
@@ -332,7 +337,7 @@ function filter_shop_products()
     $args['tax_query'] = $tax_query;
   }
 
-  error_log('Query args: ' . print_r($args, true));
+  shop_ajax_log('Query args: ' . print_r($args, true));
 
   $args = applyShopOrderby($args, $orderby);
 
@@ -341,8 +346,8 @@ function filter_shop_products()
   $total_products = $query->found_posts;
   $max_pages = $query->max_num_pages;
 
-  error_log('Shop AJAX Debug - Query args: ' . print_r($args, true));
-  error_log('Shop AJAX Debug - Found posts: ' . $total_products);
+  shop_ajax_log('Shop AJAX Debug - Query args: ' . print_r($args, true));
+  shop_ajax_log('Shop AJAX Debug - Found posts: ' . $total_products);
 
   if ($query->have_posts()) {
     ob_start();
@@ -466,12 +471,11 @@ function handle_category_products_ajax()
   $orderby = sanitize_text_field($_POST['orderby'] ?? 'menu_order');
   $category_id = intval($_POST['category_id'] ?? 0);
 
-  // Debug logging
-  error_log("CATEGORY AJAX DEBUG - Category ID: $category_id, Page: $page, Orderby: $orderby");
-  error_log('CATEGORY AJAX DEBUG - POST data: ' . print_r($_POST, true));
+  shop_ajax_log("CATEGORY AJAX DEBUG - Category ID: $category_id, Page: $page, Orderby: $orderby");
+  shop_ajax_log('CATEGORY AJAX DEBUG - POST data: ' . print_r($_POST, true));
 
   if (!$category_id) {
-    error_log('CATEGORY AJAX ERROR - No category ID provided');
+    shop_ajax_log('CATEGORY AJAX ERROR - No category ID provided');
     wp_send_json_error('Invalid category ID');
   }
 
@@ -479,14 +483,13 @@ function handle_category_products_ajax()
   $current_category = get_term($category_id, 'product_cat');
 
   if (!$current_category || is_wp_error($current_category)) {
-    error_log("CATEGORY AJAX ERROR - Category not found: $category_id");
+    shop_ajax_log("CATEGORY AJAX ERROR - Category not found: $category_id");
     wp_send_json_error('Category not found');
   }
 
-  // Debug: Log category info
-  error_log('CATEGORY DEBUG - Category name: ' . $current_category->name);
-  error_log('CATEGORY DEBUG - Category slug: ' . $current_category->slug);
-  error_log('CATEGORY DEBUG - Category parent: ' . $current_category->parent);
+  shop_ajax_log('CATEGORY DEBUG - Category name: ' . $current_category->name);
+  shop_ajax_log('CATEGORY DEBUG - Category slug: ' . $current_category->slug);
+  shop_ajax_log('CATEGORY DEBUG - Category parent: ' . $current_category->parent);
 
   // For subcategory pages, we want ONLY products from this exact category
   // Do not include children to avoid mixing different product types
@@ -518,10 +521,9 @@ function handle_category_products_ajax()
   $total_pages = $products_query->max_num_pages;
   $found_posts = $products_query->found_posts;
 
-  // Extended debug logging
-  error_log("CATEGORY AJAX RESULT - Category ID: $category_id");
-  error_log("CATEGORY AJAX RESULT - Found posts: $found_posts, Total pages: $total_pages");
-  error_log('CATEGORY AJAX RESULT - Query args: ' . print_r($args, true));
+  shop_ajax_log("CATEGORY AJAX RESULT - Category ID: $category_id");
+  shop_ajax_log("CATEGORY AJAX RESULT - Found posts: $found_posts, Total pages: $total_pages");
+  shop_ajax_log('CATEGORY AJAX RESULT - Query args: ' . print_r($args, true));
 
   ob_start();
 
@@ -557,7 +559,7 @@ function handle_category_products_ajax()
 
 function handle_category_only_ajax()
 {
-  error_log('CATEGORY AJAX DEBUG - Function handle_category_only_ajax called');
+  shop_ajax_log('CATEGORY AJAX DEBUG - Function handle_category_only_ajax called');
 
   $nonce = $_POST['nonce'] ?? '';
   if (!wp_verify_nonce($nonce, 'shop_ajax_nonce')) {
