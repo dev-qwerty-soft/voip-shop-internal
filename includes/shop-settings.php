@@ -1,5 +1,10 @@
 <?php
 
+add_filter('woocommerce_get_image_size_thumbnail', function ($size) {
+  $size['crop'] = 0;
+  return $size;
+});
+
 add_filter('template_include', function ($template) {
   if (is_singular('product')) {
     $new_template = locate_template(['woocommerce/single-product.php']);
