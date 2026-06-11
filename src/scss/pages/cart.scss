@@ -192,6 +192,7 @@
         margin-bottom: 4px;
       }
     }
+
     div {
       color: rgba(255, 255, 255, 0.6);
       font-size: get-d(14px);
@@ -234,6 +235,7 @@
       font-size: 20px;
     }
   }
+
   &__item-actions {
     display: flex;
     flex-direction: column;
@@ -280,10 +282,12 @@
 
   &__item-quantity {
     margin-top: auto;
+
     .quantity {
       display: flex;
       align-items: center;
       gap: get-d(8px);
+
       @include respond(lg) {
         gap: get-lg(8px);
       }
@@ -315,18 +319,22 @@
         width: 36px;
         height: 36px;
       }
+
       svg {
         width: get-d(16px);
         height: get-d(16px);
+
         @include respond(lg) {
           width: get-lg(16px);
           height: get-lg(16px);
         }
+
         @include respond(md) {
           width: 16px;
           height: 16px;
         }
       }
+
       &:hover {
         background: rgba(255, 255, 255, 0.1);
         border-color: rgba(255, 255, 255, 0.2);
@@ -559,15 +567,18 @@
     border-radius: get-d(20px);
     overflow: hidden;
     margin-bottom: get-d(24px);
+    padding: get-d(10px) 0;
 
     @include respond(lg) {
       border-radius: get-lg(20px);
       margin-bottom: get-lg(24px);
+      padding: get-lg(10px) 0;
     }
 
     @include respond(md) {
       border-radius: 20px;
       margin-bottom: 24px;
+      padding: 10px 0;
     }
   }
 
