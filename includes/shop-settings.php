@@ -124,10 +124,38 @@ function ajax_update_cart_quantity() {
   // Get updated cart item
   $cart_item = WC()->cart->get_cart_item($cart_item_key);
 
+  $shipping_label = esc_html__('Shipping', 'woocommerce');
+  $shipping_html = '';
+
+  if (WC()->cart->needs_shipping()) {
+    $chosen_methods = WC()->session ? WC()->session->get('chosen_shipping_methods') : [];
+    if (!empty($chosen_methods)) {
+      $packages = WC()->shipping()->get_packages();
+      if (!empty($packages)) {
+        $rates = current($packages)['rates'] ?? [];
+        $chosen_id = current($chosen_methods);
+        if (isset($rates[$chosen_id])) {
+          $shipping_label = $rates[$chosen_id]->get_label();
+        }
+      }
+    }
+
+    if (WC()->cart->show_shipping()) {
+      $shipping_total = WC()->cart->get_shipping_total();
+      $shipping_html = $shipping_total > 0
+        ? wc_price($shipping_total)
+        : '<strong>' . esc_html__('Free', 'woocommerce') . '</strong>';
+    } else {
+      $shipping_html = '<em>' . esc_html__('Calculated at checkout', 'woocommerce') . '</em>';
+    }
+  }
+
   $response = [
     'cart_subtotal' => WC()->cart->get_cart_subtotal(),
     'cart_total' => WC()->cart->get_cart_total(),
     'cart_header_price' => number_format((float) WC()->cart->get_subtotal(), 2),
+    'shipping_html' => $shipping_html,
+    'shipping_label' => $shipping_label,
   ];
 
   // Get item subtotal

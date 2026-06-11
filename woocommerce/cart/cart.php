@@ -94,7 +94,7 @@ get_template_part('template-blocks/breadcrumbs');
 
                                                 <input
                                                     type="number"
-                                                    name="cart[<?php echo $cart_item_key; ?>][qty]"
+                                                    name="cart[<?php echo esc_attr($cart_item_key); ?>][qty]"
                                                     value="<?php echo esc_attr($cart_item['quantity']); ?>"
                                                     class="input-text qty text"
                                                     step="1"
@@ -171,7 +171,7 @@ get_template_part('template-blocks/breadcrumbs');
 
                                             <input
                                                 type="number"
-                                                name="cart[<?php echo $cart_item_key; ?>][qty]"
+                                                name="cart[<?php echo esc_attr($cart_item_key); ?>][qty]"
                                                 value="<?php echo esc_attr($cart_item['quantity']); ?>"
                                                 class="input-text qty text"
                                                 step="1"
@@ -245,8 +245,8 @@ get_template_part('template-blocks/breadcrumbs');
                                 }
                             ?>
                             <div class="custom-cart__totals-row">
-                                <span class="custom-cart__totals-label"><?php echo esc_html($shipping_label); ?></span>
-                                <span class="custom-cart__totals-value">
+                                <span class="custom-cart__totals-label custom-cart__shipping-label"><?php echo esc_html($shipping_label); ?></span>
+                                <span class="custom-cart__totals-value custom-cart__shipping-value">
                                     <?php if (WC()->cart->show_shipping()):
                                         $shipping_total = WC()->cart->get_shipping_total();
                                         echo $shipping_total > 0 ? wc_price($shipping_total) : '<strong>' . esc_html__('Free', 'woocommerce') . '</strong>';
