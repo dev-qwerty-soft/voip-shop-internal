@@ -389,15 +389,34 @@
   }
 }
 
+.wc-block-components-checkout-step__heading-container {
+  margin: 0;
+}
+
 .wc-block-components-checkout-step__heading {
-  margin: 0 0 get-d(16px);
+  margin: 0;
 
   @include respond(lg) {
-    margin: 0 0 get-lg(16px);
+    margin: 0;
   }
 
   @include respond(md) {
-    margin: 0 0 16px;
+    margin: 0;
+  }
+}
+
+.wc-block-checkout__payment-method,
+.wc-block-checkout__shipping-option {
+  .wc-block-components-checkout-step__heading-container {
+    margin: 0 0 get-d(16px);
+
+    @include respond(lg) {
+      margin: 0 0 get-lg(16px);
+    }
+
+    @include respond(md) {
+      margin: 0 0 16px;
+    }
   }
 }
 
