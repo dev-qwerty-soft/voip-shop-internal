@@ -43,6 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const headerPrice = document.querySelector('.header__cart-price');
             if (headerPrice) headerPrice.textContent = data.data.cart_header_price;
           }
+          // Update mobile cart count
+          if (data.data.cart_count !== undefined) {
+            const mobileCount = document.querySelector('.header__cart-mobile-count');
+            if (mobileCount) {
+              mobileCount.textContent = data.data.cart_count;
+              mobileCount.classList.toggle('header__cart-mobile-count--empty', data.data.cart_count === 0);
+            }
+          }
           // Update shipping label and value
           if (data.data.shipping_label !== undefined) {
             const shippingLabel = document.querySelector('.custom-cart__shipping-label');

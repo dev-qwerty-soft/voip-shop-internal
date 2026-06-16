@@ -159,6 +159,7 @@ function ajax_update_cart_quantity() {
     'cart_subtotal' => WC()->cart->get_cart_subtotal(),
     'cart_total' => WC()->cart->get_cart_total(),
     'cart_header_price' => number_format((float) WC()->cart->get_subtotal(), 2),
+    'cart_count' => WC()->cart->get_cart_contents_count(),
     'shipping_html' => $shipping_html,
     'shipping_label' => $shipping_label,
   ];
