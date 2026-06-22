@@ -8,6 +8,7 @@ import '@client/elements/pricing-tabs.js';
 import '@client/page/shop-filters.js';
 import '@client/elements/quantity-buttons.js';
 import '@client/elements/cart-quantity.js';
+import '@client/elements/single-product-cart.js';
 import '@client/elements/yith-wapo-fix.js';
 import '@client/elements/woocommerce-notices.js';
 import '@client/elements/forminator-notices.js';
