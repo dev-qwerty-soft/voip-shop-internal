@@ -496,12 +496,25 @@ function custom_add_to_cart()
     wp_send_json_error(['message' => 'No product ID']);
   }
 
-  $added = WC()->cart->add_to_cart($product_id);
+  $quantity = max(1, intval($_POST['quantity'] ?? 1));
+  $added    = WC()->cart->add_to_cart($product_id, $quantity);
 
   if ($added) {
-    wp_send_json_success(['message' => 'Product added']);
+    $product  = wc_get_product($product_id);
+    $name     = $product ? $product->get_name() : __('Product', 'woocommerce');
+    $cart_url = wc_get_cart_url();
+
+    wp_send_json_success([
+      'message'    => sprintf(
+        '"%s" has been added to your cart. <a href="%s" class="button wc-forward">View cart</a>',
+        esc_html($name),
+        esc_url($cart_url)
+      ),
+      'cart_count' => WC()->cart->get_cart_contents_count(),
+      'cart_price' => number_format((float) WC()->cart->get_subtotal(), 2),
+    ]);
   } else {
-    wp_send_json_error(['message' => 'Failed to add']);
+    wp_send_json_error(['message' => 'Failed to add product to cart. Please try again.']);
   }
 }
 ?>
